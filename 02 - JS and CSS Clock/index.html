@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    
+    /* .div_second_hand{
+        top: 50%;
+        left: 50% ;
+    }
+    hr.hand {
+        position: absolute;
+        border: 10px solid black;
+        border-radius: 0px;
+        width: 20%;
+        top: 50%;
+        left: 50%;
+    }
+    hr.hand:hover{
+        position: relative;
+        border: 10px solid green;
+        border-radius: 0px;
+        width: 20%;
+        top: 50%;
+        left: 50%;
+        transform: rotate(45deg);
+    } */
+
+    /* .hour_hand, .minute_hand, .second_hand{
+        
+     
+        border: 10px solid black;
+        border-radius: 0px;
+        width: 20%;
+        top: 50%;
+        left: 50%;
+    
+    } */
+
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      /* position: relative; */
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+    
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px);   /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transform:rotate(90deg);
+      transition: all 0.5s;
+     transition-timing-function: cubic-bezier(0.67, 1.33, 0, 2.63);
+    } 
+    
+    </style>
+    <title>JS and CSS clock</title>
+</head>
+<body>
+    <!-- <div class="div_second_hand"> -->
+        <!-- <hr class="hand" >
+        <hr class="hand" id="minute"> -->
+    <!-- </div> -->
+
+
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour_hand" id="hour" style="background-color: rgb(85, 3, 3); color:rgb(85, 3, 3) ;">Hour hand</div>
+            <div class="hand minute_hand" id="minute" style="background-color: green;color: green;">Minute Hand</div>
+            <div class="hand second_hand" id ="second" style="background-color: rgb(90, 90, 90); color : rgb(90, 90, 90);;">Second hand</div>
+        </div>
+    </div>
+    <script>
+       
+        var second = document.getElementById('second');
+        var minute = document.getElementById('minute');
+        var hour = document.getElementById('hour');
+
+        
+        function initializeTime()
+        {
+            const d = new Date();
+            second.style.transform = 'rotate('+(d.getSeconds() * 6 + 90 )+'deg)';
+            minute.style.transform = 'rotate('+( d.getMinutes()  * 6 + 90 )+'deg)';
+            hour.style.transform = 'rotate(' + (d.getHours() * 30 + 90 )+'deg)';
+        }
+
+        initializeTime();
+
+        var secondTimer = setInterval(updateSecond, 1000);
+
+        function updateSecond(){
+            const d = new Date();
+            document.getElementById('second').style.transform = 'rotate('+( d.getSeconds() * 6+90)+'deg)';
+
+            console.log(d.getSeconds());
+        }
+
+
+        var minuteTimer = setInterval(updateMinute, 60*1000);
+
+        function updateMinute(){
+            const d = new Date();
+            document.getElementById('minute').style.transform = 'rotate('+( d.getMinutes() * 6 + 90)+'deg)';
+
+            console.log(d.getMinutes());
+        }
+
+        var hourTimer = setInterval(updateHour, 60*60*1000);
+        function updateHour(){
+            const d = new Date();
+            document.getElementById('hour').style.transform = 'rotate('+( d.getHours() * 30 + 90)+'deg)';
+
+            console.log(d.getMinutes());
+        }        
+        
+        // initialize with current time
+        // var second_degre = ( d.getSeconds()*6 ) % 360;
+        // console.log(d.getSeconds());
+        // second.style.transform = 'rotate('+second_degre+'deg)';
+
+        // //  var carry_hour =  ( d.getMinutes() + 30 )% 60;
+        // var minute_degre = ((   d.getMinutes()   * 6)%360);
+        // minute.style.transform = 'rotate('+minute_degre+'deg)';
+
+        // var hour_degre = (  d.getHours()  *30) % 360;
+        // hour.style.transform = 'rotate('+hour_degre+'deg)';
+
+        // console.log("Minutes : ", (d.getMinutes() )%60);
+        // console.log("Hour : ", (d.getUTCHours() )%12);
+        
+        
+        // // to change hour time
+        // var hourTimer = setInterval(updateHour, 3600000);
+        // function updateHour(){
+        //     hour_degre  = ( hour_degre + 30 ) % 360;
+        //     document.getElementById('hour').style.transform ='rotate('+hour_degre+'deg)';
+
+        // }
+
+        // // to change minute time
+        // var minuteTimer = setInterval(updateMinute, 60000);
+        // function updateMinute(){
+        //     minute_degre  = ( minute_degre + 6 ) % 360;
+        //     document.getElementById('minute').style.transform ='rotate('+minute_degre+'deg)';
+
+        // }
+
+        // // to change second time
+        // var secondTimer = setInterval(updateSecond,1000);
+        // function updateSecond(){
+        //     second_degre = ( second_degre + 6 ) % 360; 
+        //     document.getElementById('second').style.transform ='rotate('+second_degre+'deg)';
+        // }
+        // // to change minute hand
+        // setInterval(function(){
+        //     minute.style.transform='rotate(6deg)'
+        // },1000*60);
+        
+        // setInterval(function(){
+        //     hour.style.transform='rotate(30deg)'
+        // },1000*60*60);
+        
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-Variable</title>
+</head>
+<style>
+    html{
+        background-color: #193549;
+    }
+    body {
+      text-align: center;
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+    h2{
+        color: white;
+        font-size: 55px;
+    }
+
+    label{
+        color: white;
+        font-size: 50px;
+    }
+    img{
+        border: 50px solid #ffc600;
+        filter: blur(1px);
+    }
+    .text-color{
+        color: #ffc600;
+    }
+</style>
+<body>
+    <h2>Update CSS Variable with <span id="text" class="text-color">JS</span></h2>
+    <label for="spacing">Spacing:</label>
+    <input type="range" id="spacing" value="5" min="5" max="200">
+
+    <label for="blur">Blur:</label>
+    <input type="range" id="blur" value="0" min="0" max="10" step="0.3">
+
+    <label for="color">Color:</label>
+    <input type="color" id="color" value="#ffc600">
+
+    <img id = "image1" src="https://source.unsplash.com/7bwQXzbF6KE/800x500"  >
+</body>
+
+<script>
+    
+    var space_ = document.getElementById('spacing');
+    var blur_ = document.getElementById('blur');
+    var color_ = document.getElementById('color');
+    var image = document.getElementById("image1");
+    var js_text = document.getElementById("text");
+
+    console.log(space_.value);
+    console.log(blur_.value);
+    console.log(color_.value);
+
+    space_.addEventListener("input", spaceFunction);
+    blur_.addEventListener("input", blurFunction);
+    color_.addEventListener("input", colorFunction);
+
+    function spaceFunction() {
+       
+        image.style.borderWidth = `${space_.value}px`;
+        console.log(space_.value);
+    }
+
+    function blurFunction(){
+        image.style.filter = `blur(${blur_.value}px)`;
+        console.log('blur value',blur_.value);
+    }
+
+    function colorFunction(){
+        js_text.style.color = `${color_.value}`;
+        image.style.borderColor = `${color_.value}`;
+        console.log(color_.value);
+    }
+    
+
+
+</script>
+</html>

@@ -33,6 +33,8 @@ const people = [
 const list1500s = inventors.filter( a=> (a.year > 1500 && a.year<1600) );
 console.log(list1500s);
 
+
+
 // Array.prototype.map()
 
 //brute force way
@@ -47,7 +49,6 @@ console.log(listFirstLast);
 console.log("\n\n\n");
 
 // using map
-
 let listFirstLastUsingMap = inventors.map(function foo3(inventor){
     return {first : inventor.first, second:inventor.last};
 })
@@ -65,6 +66,7 @@ let listFirstLastUsingMap2 = inventors.map(inventor => ({first : inventor.first,
 //     return {first : inventor.first, second:inventor.last};
 // })
 console.log(listFirstLastUsingMap);
+
 
 
 
@@ -102,6 +104,7 @@ console.log(typeof inventors[0].year);
 console.log(inventors.reduce(function(totalYears, inventor){
     return totalYears + (inventor.passed - inventor.year);
 }, 0));
+// value 0 represent initial value for totalYears ( accumulator)
 
 
 // Sort the inventor based on the years they lived 
@@ -127,3 +130,4 @@ console.log(typeof people[0]);
 
 // 8. Reduce exercise
 // Sum up the instances of each of these
+

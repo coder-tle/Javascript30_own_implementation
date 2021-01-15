@@ -121,13 +121,90 @@ console.log(inventorsLifeSpan);
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+// let category = document.querySelector('.mw-category');
+// // let links = boulevards.querySelectorAll('a'); // returned list misses array functionality
+//                                                 // to include those we need to convert to array
+//                                                 // like 1. Array.from()
+//                                                 //      2. [...(boulevards.querySelector('a'))]
+
+// let links = Array.from(boulevards.querySelectorAll('a')); // not '.a' because to select a tag simply write it
+// let de = links.map(link=>link.innerText).filter(function(obj){
+//     if(obj.includes("de"))
+//         return true;
+//     return false;
+    
+// });
+
+
+
+
+
 
 // 7. Sort exercise 
 // Sort the people alphabetically by last name
 console.log(typeof people);
 console.log(typeof people[0]);
 
+console.log(people[0], people[1]);
+
+
+let people_sort = people.sort(function (lastOne, nextOne){
+    console.log(nextOne);
+})
+
+let people_object = people.map(function (person){
+    var nameObject = person.split(", ");
+    console.log(nameObject); 
+    return {firstName : nameObject[0], lastName : nameObject[1]};
+});
+
+console.log(people_object);
+
+let people_sorted = people_object.sort(function (a, b){
+    if(a.lastName < b.lastName){ return -1;}
+    if(a.lastName > b.lastName){return 1;}
+    return 0;
+});
+
+
+let people_sorted_efficient = people.sort(function (p1, p2){
+    var [aFirst, aLast] = p1.split(", "); //
+    console.log("\n\n\n\n");
+    // console.log(typeof [aFirst, aLast]); : this creates an object
+    var [bFirst, bLast] = p2.split(", ");
+
+    if(aLast < bLast){return -1;}
+    else if(aLast > bLast){return 1;}
+    return 1;
+});
+
+console.log("\n\n\n\n\nPeopple sorted : ",people_sorted_efficient);
+
+// More efficient way 
+
+
+console.log('\n\n\n\n\n\n')
+console.log(people_sorted);
 
 // 8. Reduce exercise
 // Sum up the instances of each of these
+
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk',
+                 'car', 'van', 'bike', 'walk', 'car', 'van', 
+                 'car', 'truck', 'pogostick'];
+
+// In the below we have created an object
+
+
+var count_ = data.reduce((count_vehicle, vehicle)=>{
+    if(vehicle in count_vehicle){
+        count_vehicle[vehicle]++;
+    }
+    else{
+        count_vehicle[vehicle] = 1;
+    }
+    console.log(typeof count_vehicle);
+    return count_vehicle;
+},{});
+console.log(count_);
 

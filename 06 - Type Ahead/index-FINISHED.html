@@ -26,6 +26,8 @@ function findMatches(wordToMatch, cities) {
   return cities.filter(place => {
     // here we need to figure out if the city or state matches what was searched
     const regex = new RegExp(wordToMatch, 'gi');
+
+    // 
     return place.city.match(regex) || place.state.match(regex)
   });
 }
@@ -35,11 +37,20 @@ function numberWithCommas(x) {
 }
 
 function displayMatches() {
+  //console.log(findMatches(this.value, cities));
   const matchArray = findMatches(this.value, cities);
+  //console.log(matchArray);
+
+  // matchArray is an array of objects 
+
   const html = matchArray.map(place => {
+    // now highlight the matched text in the suggested cities
     const regex = new RegExp(this.value, 'gi');
+    //console.log(place); place is an object which have either matching state name or city name
+    
     const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
     const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    //console.log(cityName);//, stateName);
     return `
       <li>
         <span class="name">${cityName}, ${stateName}</span>
@@ -47,6 +58,9 @@ function displayMatches() {
       </li>
     `;
   }).join('');
+  // html is array of 'li' of unordered list
+
+
   suggestions.innerHTML = html;
 }
 

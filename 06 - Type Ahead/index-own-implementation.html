@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Look ahead 👁️</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <form action="" class="search-form">
         <input type="text" class="search" placeholder="City or State">
@@ -19,41 +21,107 @@
         const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
         const cities = [];
         fetch(endpoint).then(res => res.json()).then(data => cities.push(...data));
-        console.log(cities);
+        // console.log(cities);
         // var inp = document.querySelector('.search')
 
 
+        var suggest = document.querySelector('.suggestions');
+        var inputData = document.querySelector('.search').value;
+        // to add content to html document via javascript
+        // const newItem = document.createElement("li");
+        // newItem.appendChild(document.createTextNode("India"));
+        // suggest.appendChild(newItem);
 
-
+        // const newItem2 = document.createElement("li");
+        // newItem2.appendChild(document.createTextNode("Bangladesh"));
+        // suggest.appendChild(newItem2);
 
         // Returns matching cities
-        function findMatches(wordToMatch, cities){
-            return cities.filter( place => {
-                // code to find matches 
+        function findMatches(wordToMatch, cities) {
+            return cities.filter(place => {
+                // code to find matches
 
                 // console.log(place.city);
                 var re = new RegExp(wordToMatch, "i");
-                return place.city.match(re);
+
+                // return place.city.match(re); // THIS will just match city name we need to match state name as well
+
+                return place.city.match(re) || plac.state.match(re);
 
             })
         }
 
+        var search = document.querySelector('.search');
 
+        // add event listener to show recomendataion
+        search.addEventListener('input', triggerSearch);
+
+        // add event listener to reset to default value
+        search.addEventListener('onsubmit', initialize);
+
+
+
+        function triggerSearch(obj) {
+            //console.log(obj);
+            // console.log(obj.data);
+            // console.log(typeof obj);
+            // console.log(findMatches(obj.data, cities));
+            var inputData = document.querySelector('.search').value;
+            if(!obj.data)return;
+            while(suggest.hasChildNodes()){
+                suggest.removeChild(suggest.firstChild);
+            }
+            
+            
+            var search_city = inputData ;//+ obj.data;
+            // console.log(search_city);
+            let suggestedCities = findMatches(search_city, cities);
+             console.log(suggestedCities);
+            // suggestedCities.forEach(element => {
+            //     console.log(element.city);
+            // });
+
+
+            var size1 = suggestedCities.length;
+
+            for(let i = 0; i<size1; i++){
+                const newItem = document.createElement("li");
+                newItem.appendChild(document.createTextNode(suggestedCities[i].city+","+suggestedCities[i].state+suggestedCities[i].latitude+" "+suggestedCities[i].longitude));
+                suggest.appendChild(newItem);
+   
+            }
+
+        }
 
         
+        function initialize(){
+            const newItem1 = document.createElement("li");
+            newItem1.appendChild(document.createTextNode("Filter For City"));
+            suggest.appendChild(newItem1);
+
+            const newItem2 = document.createElement("li");
+            newItem2.appendChild(document.createTextNode("Or State"));
+            suggest.appendChild(newItem2);
+        }
+
+
+
+
+
+
 
         // function autocomplete(inp, arr) {
         // /*the autocomplete function takes two arguments,
         // the text field element and an array of possible autocompleted values:*/
         // var currentFocus;
-       
+
         // /*execute a function when someone writes in the text field:*/
         // inp.addEventListener("input", function(e) {
         // var a, b, i, val = this.value;
         // /*close any already open lists of autocompleted values*/
         // closeAllLists();
         // if (!val) { return false;}
-        
+
         // currentFocus = -1;
         // /*create a DIV element that will contain the items (values):*/
         // a = document.createElement("DIV");
@@ -143,4 +211,5 @@
 
     </script>
 </body>
+
 </html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Practise</title>
+</head>
+<body>
+    <canvas id="canvas_1" width="700px" height="700px">
+
+    </canvas>
+</body>
+
+<script>
+    var canvas = document.getElementById("canvas_1");
+    var tip = canvas.getContext("2d");
+    tip.beginPath();
+    tip.moveTo(0,0);
+    tip.strokeStyle = "red";
+    tip.lineTo(400, 400);
+    tip.stroke();
+
+</script>
+</html>

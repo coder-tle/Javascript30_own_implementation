@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw in Canavas</title>
+</head>
+<body>
+    <canvas id="canvas_1" width="500px" height="700px">
+
+    </canvas>
+    
+</body>
+
+<script>
+
+
+    var draw = document.getElementById("canvas_1");
+    draw.width = window.innerWidth;
+    draw.height = window.innerHeight;
+    var tip = draw.getContext("2d");
+    var isPenInUse = false;
+    var x = 0, y = 0;
+    tip.lineWidth = 10;
+    tip.lineJoin = 'round';
+    tip.lineCap = 'round';
+    tip.strokeStyle = '#BAD55';
+    var hue = 0;
+    
+    // This ensures that when mouse is out of the sope & when comes
+    // back it does not draw. once out draw should stop. Should 
+    // start only when mouse is clicked inside the scope of browser
+    draw.addEventListener('mouseout', ()=>isPenInUse = false);
+
+    draw.addEventListener('mousedown',startDraw);
+    function startDraw(obj){
+        // console.log(this);
+        console.log(obj);
+        isPenInUse = true;
+        x = obj.pageX;
+        y = obj.pageY;
+        // getCoordinate(obj);
+
+        console.log(`Mouse down at coordinate ${x}, ${y}`);
+        isPenInUse = true;
+        //tip.beginPath();
+        // tip.moveTo(x,y);
+        // tip.strokeStyle = 'black';
+        // console.log("mouse clicked down");
+        // console.log(this.screenX);
+    }
+
+    
+
+    draw.addEventListener('mousemove', drawFunction);
+    function drawFunction(obj){
+        
+        // console.log("Mouse is moving");
+        // console.log("mouse move event"+obj);
+        // // drawing on canvas
+      
+        // tip.fillStyle = "red";
+        // tip.fill();   
+        if(isPenInUse == true){
+        tip.beginPath();
+        console.log("inside the line drawing");
+        console.log(`current position is ${obj.screenX}, ${obj.screenY}`);
+
+        tip.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+        tip.lineWidth++;
+        //getCoordinate(obj);
+        tip.moveTo(x,y);
+
+        //tip.lineWidth = 5;
+        //tip.strokeStyle = 'black';
+        tip.lineTo(obj.pageX, obj.pageY);
+        x = obj.pageX;
+        y = obj.pageY;
+        // tip.strokeStyle = 'black';
+        tip.stroke();
+        hue += 2;
+
+        if(tip.lineWidth == 100){
+            tip.lineWidth = 10;
+            console.log("line width reduced");
+        }
+
+        // if(tip.lineWidth <= 100)
+        // {
+        //     tip.lineWidth++;
+        // }
+        // else{
+        //     tip.lineWidth--;
+        // }
+         }
+    }
+
+
+    draw.addEventListener('mouseup', endDraw);
+    function endDraw(obj){
+        console.log("pen down clicked");
+        isPenInUse = false;
+    }
+
+    function getCoordinate(event1){
+        x = event1.screenX;
+        y = event1.screenY;
+    }
+</script>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Trick</title>
+</head>
+<body>
+    <p onclick="makeGreen()" style="color: rgb(186,218, 85); font-size: 50px;">
+        xBREAKxDOWNx</p>
+</body>
+
+<script>
+    var p1 = document.querySelector("p");
+
+    var dog =[{name : 'hugo', age : 5}, {name:'Snickers', age: 15}];
+    function makeGreen(){
+       
+        p1.style.fontSize = "200px";
+        p1.style.color = "rgb(255,0,0)";
+    }
+
+    // Some console tricks
+    console.log("Hi I am text");
+
+    // interpolate like c++
+    console.log("Hi I am %s year old", "23");
+
+    // better way than this exist 
+    var x = 23;
+    console.log(`Hi I am ${x} years old`);
+
+
+    // text can be styled by adding %c followed by style string
+    console.log("%c Hi I am some text", "font-size: 40px; color: red; background-color: black; text-shadow: 20px;");
+
+    
+    // warning
+    console.warn("OH NOOO");
+
+
+    // Error 
+    console.error("Shit !");
+
+    // Info
+    console.info("Children are not always good during work");
+
+
+    // testing 
+    // if first expression gives wrong result then second statement
+    // will get executed
+    console.assert(1===2, "this is wrong");
+    
+    // clear
+    console.clear();
+
+
+    // viewing DOM elements 
+    console.log(p1); // this displays html tag
+    console.dir(p1); // lists all details including functions associated
+
+    // Grouping togethers
+    console.log(dog);
+    console.log(typeof dog);
+    dog.forEach(dog => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`Dog name is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.year} years old`);
+        console.log(`blah blah`);
+        console.groupEnd();
+    });
+
+
+    console.clear();
+
+
+
+    // counting 
+    // it counts how many times the string has been passed in realtime
+    console.count("meraki");
+    console.count("meraki");
+    console.count("meraki");
+    console.count("enterprise");
+    console.count("enterprise");
+    console.count("meraki");
+    console.count("meraki");
+
+
+
+    // timing 
+    // used to calculate how much time elapsed 
+
+    console.time('fetching data');
+    console.time('display data time');
+    fetch('https://api.github.com/users/coder-tle')
+        .then(data=>data.json())
+        .then(data => {
+            console.timeEnd('fetching data');
+            console.log(data);
+            console.timeEnd('display data time');
+        })
+</script>
+</html>

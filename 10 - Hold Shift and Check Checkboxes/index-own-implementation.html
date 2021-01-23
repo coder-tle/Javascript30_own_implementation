@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hold Shift & Check Checkbox</title>
+    <style>
+        input:checked+p{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox">
+            <p>This is an inbox layout</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Check one item</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Hold down shift key</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Check a lower item</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Everything in between should also be set to checked</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Try do it without any libraries</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p> Just regular JavaScript</p>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Good Luck!</p>
+        </div>
+
+        <div class="item">
+            <input type="checkbox">
+            <p>Don't forget to tweet your result!</p>
+        </div>
+
+        
+    </div>
+</body>
+    <script>
+        var checkLists = document.querySelectorAll("input");
+        console.log(checkLists);
+
+
+        // checkLists.forEach((checkList) => {
+        // console.count("adding event listener");
+        // checkList.addEventListener('onchange',(e)=>{
+        //     console.log(e);
+        //     console.log(this);
+        // }
+        // )
+        // });
+
+        //how to do with event listener??
+        // checkLists.forEach((e)=>{
+        //     console.log(e);
+        //     e.addEventListener('change', myFunction);
+        // });
+
+        function myFunction(){
+            
+        }
+
+
+
+    </script>
+</html>

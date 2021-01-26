@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hold Shift & Check Checkbox</title>
     <style>
-        input:checked+p{
+        input:checked+p{ /* first <p> tag of input tag will be crossed */
             text-decoration: line-through;
         }
     </style>
@@ -15,6 +15,7 @@
         <div class="item">
             <input type="checkbox">
             <p>This is an inbox layout</p>
+            <!-- <p>Lorem ipsum dolor sit amet.</p> this will not be crossed -->
         </div>
 
         <div class="item">
@@ -81,9 +82,19 @@
         //     e.addEventListener('change', myFunction);
         // });
 
-        function myFunction(){
+        // function myFunction(){
             
+        // }
+
+        document.addEventListener('click', recordShiftKey);
+
+        function recordShiftKey(e){
+            console.log("Callback function called");
+            console.log(e);
+            console.log(typeof e);
+
         }
+        
 
 
 

@@ -63,18 +63,53 @@
     </div>
 </body>
     <script>
-        var checkLists = document.querySelectorAll("input");
+        var checkLists = document.querySelectorAll('.inbox input[type="checkbox"]');
         console.log(checkLists);
 
+        let lastChecked;
 
-        // checkLists.forEach((checkList) => {
+        function handleCheck(e){
+        let inBetween = false;
+        if(e.shiftKey && this.checked){
+
+                // let inBetween = false;
+                checkLists.forEach(checkList => {
+                    console.log(checkList);
+                     if(checkList === this || checkList === lastChecked){  
+                        console.log("Starting to check");
+                        inBetween = !inBetween;
+                     }
+
+                     if(inBetween){
+                        checkList.checked = true;
+                    }
+                });
+
+            }
+            
+            lastChecked = this;
+            console.log(lastChecked)
+
+        }
+        
+        checkLists.forEach((checkList) => {
         // console.count("adding event listener");
-        // checkList.addEventListener('onchange',(e)=>{
-        //     console.log(e);
-        //     console.log(this);
+        checkList.addEventListener('click',handleCheck);});
+
+
+         //     if( e.shiftKey && this.checked ){
+
+        //         checkLists.forEach(checkList =>{
+        //             if( checkList === this || checkList === lastChecked){
+        //                 inBetween = !inBetween;
+
+        //             }
+        //             if()
+        //         }
+                
         // }
-        // )
-        // });
+            // console.log(e);
+            // console.log("Event listener fired ")
 
         //how to do with event listener??
         // checkLists.forEach((e)=>{
@@ -86,14 +121,16 @@
             
         // }
 
-        document.addEventListener('click', recordShiftKey);
+        // document.addEventListener('click', recordShiftKey);
 
-        function recordShiftKey(e){
-            console.log("Callback function called");
-            console.log(e);
-            console.log(typeof e);
+        // function recordShiftKey(e){
+        //     console.log("Callback function called");
+        //     console.log(e);
+        //     console.log(typeof e);
+            
+            
 
-        }
+        // }
         
 
 

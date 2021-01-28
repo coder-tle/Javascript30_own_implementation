@@ -5,15 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Video Player</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" >
 </head>
 <body>
     <div class="player">
-    <video controls autoplay >
+    <video >
         <source src="652333414.mp4" type="video/mp4">
     </video>
-    <button type="button" =></button>
-    
+   
     </div>
+    <div>
+        <button data-status = "pause" id="playButton" class="player__button" type="button" style="height: 20px; width: 40px;"> &#9658;</button>
+        <input id="volumeController" type="range" class="player__slider" min="0.0" max="1.0" step="0.05" value="0.3" >
+        <input id="speedController" type="range" class="player__slider" min="0.5" max="2.0" step="0.25" value="1.0">
+        <button data-skip= "-10" id="skipBack" class="player__button" type="button" style="height: 20px; width: 60px;">« 10s</button>
+        <button data-skip= "25" id="skipForward" class="player__button" type="button" style="height: 20px; width: 60px;">25s »</button>
+
+    </div>
+
+
+    <script>
+        var playButton = document.getElementById("playButton");
+        var volumeSlider = document.getElementById("volumeController");
+        var speedSlider = document.getElementById("speedController");
+
+        var skip = document.querySelectorAll("button[data-skip]");
+        // var skip = container.querySelectorAll("button[data-skip]");
+
+
+        // console.log(skip);
+        var media = document.querySelector("video");
+
+        // now add the functionality behind 
+
+        playButton.addEventListener('click', pausePlay);
+        volumeSlider.addEventListener('input', volumeChange);
+        speedSlider.addEventListener('input', speedChange);
+       
+        // skip.addEventListener('click', skipPosition); // its not a single button
+                                                        // rather array of buttons
+        skip.forEach(e => {
+            e.addEventListener('click', skipPosition);
+        });
+
+
+        function pausePlay(e){
+            console.log("play pause working");
+            // console.log(media);
+            // console.log(e);
+            // console.log(playButton);
+            // if(playButton.data-status=="pause"){
+            //     console.log("Playing");
+            // }
+
+            console.log(playButton.dataset.status);
+            if(playButton.dataset.status == "pause"){
+                console.log("video resumed");
+                playButton.dataset.status = "play";
+                media.play();
+            }
+            else if(playButton.dataset.status == "play"){
+                console.log("video paused");
+                playButton.dataset.status = "pause";
+                media.pause();
+            }
+        }
+
+        
+        function volumeChange(e){
+            console.log("volume change working");
+            // console.log(e);
+
+            // console.log(volumeSlider.value);
+            media.volume = volumeSlider.value;
+
+        }
+
+        function speedChange(){
+            console.log("speed change working");
+
+            console.log(speedSlider.value);
+
+            media.playbackRate = speedSlider.value;
+
+        }   
+
+        function skipPosition(){
+
+            console.log("skip position working");
+        }   
+        
+
+    </script>
+    
+    
 </body>
 </html>

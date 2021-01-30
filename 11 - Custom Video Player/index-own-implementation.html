@@ -5,24 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Video Player</title>
 
-    <link rel="stylesheet" >
+    <style>
+        
+        .player{
+            max-width: 750px;
+            overflow: hidden;
+            position : relative;
+        }
+        video{
+            width: 100%;
+            
+        }
+        .player__control{
+           width: 100%;
+           position: absolute;
+           display: flex;
+           transform: translateY(100%) translateY(-5px);
+           transition: all .3s;
+        }
+        .player:hover .player__control{
+            /* display: flex; */
+            /* transform: translateY(-40px);
+            transition-duration: 1s; */
+            transform: translateY(-20px);
+            
+
+
+        }
+        .flex_element{
+            
+            flex-grow: 1;
+        }
+    </style>
 </head>
 <body>
+
     <div class="player">
-    <video >
-        <source src="652333414.mp4" type="video/mp4">
-    </video>
-   
-    </div>
-    <div>
-        <button data-status = "pause" id="playButton" class="player__button" type="button" style="height: 20px; width: 40px;"> &#9658;</button>
-        <input id="volumeController" type="range" class="player__slider" min="0.0" max="1.0" step="0.05" value="0.3" >
-        <input id="speedController" type="range" class="player__slider" min="0.5" max="2.0" step="0.25" value="1.0">
-        <button data-skip= "-10" id="skipBack" class="player__button" type="button" style="height: 20px; width: 60px;">« 10s</button>
-        <button data-skip= "25" id="skipForward" class="player__button" type="button" style="height: 20px; width: 60px;">25s »</button>
+        <video >
+            <source src="652333414.mp4" type="video/mp4">
+        </video>
+
+        <div class="player__control" >
+
+                <!-- <div class="progress"> Bhavuk
+                </div> -->
+            <button data-status = "pause" id="playButton" class="player__button flex_element" type="button" style="height: 20px; width: 40px;">▶️</button>
+            <input id="volumeController" type="range" class="player__slider flex_element" min="0.0" max="1.0" step="0.05" value="0.3" >
+            <input id="speedController" type="range" class="player__slider flex_element" min="0.5" max="2.0" step="0.25" value="1.0">
+            <button data-skip= "-10" id="skipBack" class="player__button flex_element" type="button" style="height: 20px; width: 60px;">« 10s</button>
+            <button data-skip= "25" id="skipForward" class="player__button flex_element" type="button" style="height: 20px; width: 60px;">25s »</button>
+
+        </div>
+
+
 
     </div>
-
 
     <script>
         var playButton = document.getElementById("playButton");
@@ -36,12 +73,12 @@
         // console.log(skip);
         var media = document.querySelector("video");
 
-        // now add the functionality behind 
+        // now add the functionality behind
 
         playButton.addEventListener('click', pausePlay);
         volumeSlider.addEventListener('input', volumeChange);
         speedSlider.addEventListener('input', speedChange);
-       
+
         // skip.addEventListener('click', skipPosition); // its not a single button
                                                         // rather array of buttons
         skip.forEach(e => {
@@ -63,15 +100,17 @@
                 console.log("video resumed");
                 playButton.dataset.status = "play";
                 media.play();
+                this.textContent = "⏸️";
             }
             else if(playButton.dataset.status == "play"){
                 console.log("video paused");
                 playButton.dataset.status = "pause";
                 media.pause();
+                this.textContent = '▶️';
             }
         }
 
-        
+
         function volumeChange(e){
             console.log("volume change working");
             // console.log(e);
@@ -88,16 +127,30 @@
 
             media.playbackRate = speedSlider.value;
 
-        }   
+        }
 
-        function skipPosition(){
+        function skipPosition(e){
 
             console.log("skip position working");
-        }   
-        
+            console.log(media.currentTime);
+
+            let _currentTime = parseInt(media.currentTime);
+            // console.log(e);
+            // console.log(this);
+
+            _currentTime = _currentTime + parseInt(this.dataset.skip);
+
+
+            _currentTime = (_currentTime >= 0) ? _currentTime : 0;
+            _currentTime = (_currentTime < media.duration) ? _currentTime : media.duration ;
+            media.currentTime = _currentTime;
+
+            console.log(media.currentTime);
+        }
+
 
     </script>
-    
-    
+
+
 </body>
 </html>

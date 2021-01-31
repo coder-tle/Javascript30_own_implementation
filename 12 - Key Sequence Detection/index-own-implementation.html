@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Sequence Detection ( Kaoni Code / Cheat Codes )</title>
+</head>
+<style>
+    .cheat_class{
+        display: none;
+    }
+    .show{
+        display: inline;
+    }
+</style>
+<body>
+    <p class="heading">Key Sequence Detection</p>
+    <p class="cheat_class">Key sequence activated</p>
+</body>
+
+<script>
+    // window.addEventListener('keydown', foo);
+    // window.addEventListener('keyup', foo2);
+    // function foo(e){
+    //     console.log(e);
+    //     console.log("Window object detected key press");
+    //     document.querySelector(`p[class='cheat_class']`).style.display="inline";
+    // }
+    // function foo2(e){
+    //     console.log(e);
+    //     console.log("Window object detected key up");
+    //     document.querySelector(`p[class='cheat_class']`).style.display="none";
+    // }
+    var sequence_ = "abc";
+    var x = new Array(sequence_.length);
+
+    console.log(x);
+    console.log(x.length);
+
+    window.addEventListener('keydown', checkKeySequence);
+
+    function checkKeySequence(e){
+        console.log(e);
+
+        if(x.length == sequence_.length){
+            
+           
+            x.shift();
+            
+        }
+
+        x.push(e.key);
+        if(x.join("").trim() == sequence_.trim()){
+                document.querySelector(`p[class='cheat_class']`).style.display="inline";
+            }
+        else{
+            document.querySelector(`p[class='cheat_class']`).style.display="none";
+        }
+        console.log("sequence recorded"+x);
+        // console.log(x.toString();
+        console.log(x.join(""));
+
+        
+    }
+    
+</script>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage & Event delegation</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>LOCAL TAPAS</h2>
+        <ul class="plates">
+            <li>Loading Tapas..</li>
+        </ul>
+        <form class="add-items">
+            <input type="text" name = "item" placeholder="Item Name" required>
+            <input type="submit" value="+Add Item">
+        </form>
+
+
+    </div>
+
+</body>
+<script>
+    // var itemList = document.querySelector('.add-items');
+    // var plates = document.querySelector('.plates');
+
+    // const button = itemList.querySelector( `input[type='submit']`);
+    
+    // // console.log(button);
+    // // console.log(item);
+    // // console.log(typeof item);
+    // // console.log(item.elements[0].value);
+
+    // // button.addEventListener('submit', foo);
+    // itemList.addEventListener('submit', foo);
+    // function foo(e){
+    //     // console.log(item.querySelector(`input[name='item']`).value);
+    //     // console.log("Submit button working");
+    //     e.preventDefault();
+    //     console.log("item received");
+    //     var item = itemList.querySelector(`input[name='item']`);
+    //     console.log(item.value);
+
+    //     const newItem = document.createElement("li");
+    //     newItem.appendChild(document.createTextNode(item.value));
+    //     plates.appendChild(newItem);
+        
+    //     item.value = "";
+        
+    // }
+
+    const addItems = document.querySelector('.add-items');
+    const itemList = document.querySelector('.plates');
+    const items = JSON.parse(localStorage.getItem('items')) || [];
+
+    function addItem(e){
+        e.preventDefault();
+        const text = (this.querySelector('[name = item]')).value;
+        const item = {
+            text : text,
+            done : false
+
+        };
+        items.push(item);
+        populateList(items, itemList);
+        localStorage.setItem('items', JSON.stringify(items));
+        this.reset(); // this will clear all input field of form
+    }
+
+    function populateList(plates, platesList){
+        // below will return comma separated strings (li);
+        platesList.innerHTML = plates.map((plate, i)=>{
+
+            return `<li>
+                <input type="checkbox" data-index=${i} id = "item${i}" ${plate.done ? 'checked' : ''}/>
+                <label for="item${i}">${plate.text}</label>
+                </li>`
+        }).join('');  // join removes comma 
+    }
+
+    function toggleDone(e){
+        if(!e.target.matches('input'))return;
+        const el = e.target;
+        const index = el.dataset.index;
+        items[index].done = !items[index].done;
+
+        localStorage.setItem('items', JSON.stringify(items));
+        populateList(items, itemList);
+    }
+
+    addItems.addEventListener('submit', addItem);
+    itemList.addEventListener('click', toggleDone);
+    populateList(items, itemList);
+</script>
+</html>

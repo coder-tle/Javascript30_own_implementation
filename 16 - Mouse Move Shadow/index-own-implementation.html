@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Move</title>
+</head>
+<style>
+    h1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <h1 style="text-shadow: 5px 5px pink, 15px 15px springgreen, 35px 35px green, 55px 55px purple ">🔥Software Rocks!!</h1>
+</body>
+<script>
+    window.addEventListener('mousemove', moveShadow);
+    // window.addEventListener('mousedown',moveShadow);
+    var text = document.querySelector("h1");
+    
+    function moveShadow(e){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        
+        // console.log(e);
+        console.log("Mouse motion detected");
+        // console.log(e.clientX);
+        console.log(`X - coordinate : ${e.clientX}, Y - coordinate : ${e.clientY}`);
+        // text.style.textShadow = `${e.clientX}px ${e.clientY}px  pink, ${width/2 - e.clientX}px ${e.clientY}px  springgreen, ${width/2 - e.clientY}px ${height/2-e.clientX}px green, ${height/2 - e.clientY}px ${e.clientX} purple`;
+        text.style.textShadow = `${e.clientX}px ${e.clientY}px  pink, ${width/2 - e.clientX}px ${e.clientY}px  springgreen, ${width/2 - e.clientY}px ${height/2-e.clientX}px green, ${height/2 - e.clientY}px ${e.clientX} purple`;
+    }
+</script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort without article</title>
+</head>
+    <style>
+        body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+    #bands {
+      list-style: inside square;
+      font-size: 20px;
+      background: white;
+      width: 500px;
+      margin: auto;
+      padding: 0;
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    #bands li {
+      /* add border at the bottom */
+      border-bottom: 5px solid #efefef; 
+      padding: 20px;
+    }
+    #bands li:last-child {
+      border-bottom: 0;
+    }
+    </style>
+<body>
+    <ul id="bands"></ul>
+</body>
+<script>
+    var container = document.querySelector('#bands');
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+    // const temp = [...bands];
+    // temp.sort();
+    // console.log(temp);
+
+    // const temp2 = [...bands];
+    // // const regex = /(?:(the|a|an|oh|,)+)/gi;
+    const regex = /^(a |the |an )/i
+    // temp2.forEach(i=>{
+    //     var res = '';
+    //     console.log(i.replace(regex, res));
+    // });
+    // console.clear();
+    const array2 = bands.map( str =>{
+        const res ='';
+        const str2 = str.replace(regex, res);
+        return {str, str2};
+    });
+    
+    // console.log(typeof array2, array2);
+
+
+    const array3 = [...array2];
+    // console.log(array3.sort((a,b)=>{
+    //     if(a.str2 < b.str2)
+    //         return -1;
+    //     if(a.str2 > b.str2)
+    //         return 1;
+    //     return 0;
+    // }));
+
+    const sortedArray = array3.sort((a,b)=>{
+        if(a.str2 < b.str2)
+            return -1;
+        if(a.str2 > b.str2)
+            return 1;
+        return 0;
+    });
+
+    // function displaySorted(){
+        container.innerHTML = sortedArray.map((obj)=>{
+            return `
+            <li>
+                ${obj.str}
+            </li>
+            `
+        }).join('');
+    // }
+
+    // displaySorted();
+
+
+</script>
+</html>

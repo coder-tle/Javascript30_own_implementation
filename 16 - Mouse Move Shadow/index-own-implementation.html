@@ -1,35 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mouse Move</title>
 </head>
 <style>
-    h1{
+    body {
+        margin: 0;
+    }
+
+    h1 {
+        background-color: red;
+    }
+
+    .parent {
+        min-height: 100vh;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        background-color: sienna;
     }
 </style>
+
 <body>
-    <h1 style="text-shadow: 5px 5px pink, 15px 15px springgreen, 35px 35px green, 55px 55px purple ">🔥Software Rocks!!</h1>
+    <div class="parent">
+        <h1 contenteditable>🔥Software Rocks!!</h1>
+    </div>
 </body>
 <script>
-    window.addEventListener('mousemove', moveShadow);
-    // window.addEventListener('mousedown',moveShadow);
-    var text = document.querySelector("h1");
-    
-    function moveShadow(e){
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        
+
+    var parent_div = document.querySelector(".parent");
+    var text_h1 = parent_div.querySelector("h1");
+    const walk = 500;
+    function shadow(e) {
+        console.count("mousemoved");
         // console.log(e);
-        console.log("Mouse motion detected");
-        // console.log(e.clientX);
-        console.log(`X - coordinate : ${e.clientX}, Y - coordinate : ${e.clientY}`);
-        // text.style.textShadow = `${e.clientX}px ${e.clientY}px  pink, ${width/2 - e.clientX}px ${e.clientY}px  springgreen, ${width/2 - e.clientY}px ${height/2-e.clientX}px green, ${height/2 - e.clientY}px ${e.clientX} purple`;
-        text.style.textShadow = `${e.clientX}px ${e.clientY}px  pink, ${width/2 - e.clientX}px ${e.clientY}px  springgreen, ${width/2 - e.clientY}px ${height/2-e.clientX}px green, ${height/2 - e.clientY}px ${e.clientX} purple`;
+        // console.log(this); // this wil be always parent_div
+        // console.log(e.target);
+        // console.log(e.offsetX, e.offsetY);
+
+        // offsetWidth is calculating total width of the parent_div
+        const { offsetWidth: width, offsetHeight: height } = parent_div;
+
+        // offsetX is calculating pixel position of mouse w.r.t. its target element 
+        let { offsetX: x, offsetY: y } = e;
+
+
+        if (this !== e.target) {
+            x = x + e.target.offsetLeft;
+            y = y + e.target.offsetTop;
+        }
+        console.log(e.target.offsetTop);
+        console.log(`Co-ordinate values is ${x},${y}`);
+
+        const xWalk = Math.round((x / width * walk) - (walk / 2));
+        const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+        text_h1.style.textShadow = `
+      ${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7),
+      ${xWalk * -1}px ${yWalk}px 0 rgba(0,255,255,0.7),
+      ${yWalk}px ${xWalk * -1}px 0 rgba(0,255,0,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
+    `;
+
+
     }
+
+    parent_div.addEventListener("mousemove", shadow);
+    // text_h1.addEventListener("mousemove", shadow);
+
+    // window.addEventListener('mousemove', moveShadow);
+    // // window.addEventListener('mousedown',moveShadow);
+    // var text = document.querySelector("h1");
+
+    // function moveShadow(e){
+    //     var width = window.innerWidth;
+    //     var height = window.innerHeight;
+    //     width = Math.round(width/2) - 250;
+    //     height  = Math.round(height/2) -250;
+    //     // console.log(e);
+    //     console.log("Mouse motion detected");
+    //     // console.log(e.clientX);
+    //     console.log(`X - coordinate : ${e.clientX}, Y - coordinate : ${e.clientY}`);
+    //     // text.style.textShadow = `${e.clientX}px ${e.clientY}px  pink, ${width/2 - e.clientX}px ${e.clientY}px  springgreen, ${width/2 - e.clientY}px ${height/2-e.clientX}px green, ${height/2 - e.clientY}px ${e.clientX} purple`;
+    //     text.style.textShadow = `${e.clientX}px ${e.clientY}px  pink, ${width - e.clientX}px ${e.clientY}px  springgreen, ${width - e.clientY}px ${height-e.clientX}px green, ${height - e.clientY}px ${e.clientX} purple`;
+
+    // }
 </script>
+
 </html>

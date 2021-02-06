@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo booth</title>
+</head>
+
+<body>
+    <div class="photobooth">
+        <video class="player"></video>
+        <canvas class="photo" style="height: 30%; width: 30%;"></canvas>
+        <img id="source" src="img.jpg">
+    </div>
+</body>
+<script>
+    const video = document.querySelector(".player");
+    const photo = document.querySelector(".photo");
+
+    var ctx = photo.getContext("2d");
+
+    // video.addEventListener('play', () => {
+    //     ctx.drawImage(this, 0, 0);
+    // })
+    const image = document.getElementById('source');
+
+    image.addEventListener("load", e => {
+        ctx.drawImage(image);
+    })
+
+
+    function getVideo() {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(localMediaStream => {
+                console.log(localMediaStream);
+                console.log(navigator);
+                video.srcObject = localMediaStream;
+                video.play();
+            })
+            .catch(err => {
+                console.error("Oh NO!!", err);
+            });
+
+    }
+    getVideo();
+    // video.addEventListener('canplay', )
+</script>
+
+</html>

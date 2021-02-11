@@ -5,46 +5,258 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo booth</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        input, label, button{
+            font-size: medium;
+            font-weight: 300;
+            font-style: italic;
+            color: rgb(24, 38, 236);
+        }
+    </style>
 </head>
 
 <body>
     <div class="photobooth">
+        <div class="controls">
+            <button onclick="takePhoto()">Take Photo</button>
+            <label for="redValue">Redness</label>
+            <input id="redValue" type="range" value="0" min="0" max="255" step="25" >
+            <label for="greenValue">Greeness</label>
+            <input id="greenValue" type="range" value="0" min="0" max="255" step="25">
+            <label for="blueValue">Blueness</label>
+            <input id="blueValue" type="range" value="0" min="0" max="255" step="25">
+
+        </div>
+        <canvas class="photo" width="620px" height="420px"></canvas>
         <video class="player"></video>
-        <canvas class="photo" style="height: 30%; width: 30%;"></canvas>
-        <img id="source" src="img.jpg">
+        <div class="strip"></div>
+
     </div>
+    <audio class="snap" src="./snap.mp3" hidden></audio>
 </body>
 <script>
     const video = document.querySelector(".player");
-    const photo = document.querySelector(".photo");
+    const canvas = document.querySelector(".photo");
+    const snap = document.querySelector('.snap');
+    const strip = document.querySelector('.strip');
+    var ctx = canvas.getContext("2d");
 
-    var ctx = photo.getContext("2d");
-
-    // video.addEventListener('play', () => {
-    //     ctx.drawImage(this, 0, 0);
-    // })
-    const image = document.getElementById('source');
-
-    image.addEventListener("load", e => {
-        ctx.drawImage(image);
-    })
-
-
-    function getVideo() {
+    function startWebCam() {
         navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(localMediaStream => {
-                console.log(localMediaStream);
-                console.log(navigator);
+
                 video.srcObject = localMediaStream;
                 video.play();
+
+                // var webcam_tracks = localMediaStream.getVideoTracks();
+                // var video_webcam = webcam_tracks[0];
+
+
+                // console.log("Video track : ", video_webcam);
+
+
+
+                // imageCapture = new ImageCapture(video_webcam);
+
+                // console.log(imageCapture);
+                // console.log("Image captured");
             })
             .catch(err => {
                 console.error("Oh NO!!", err);
             });
+        // console.log(promise);
+        // console.log(typeof promise);
+    }
+
+    function paintToCanvas() {
+        console.log(video);
+        const width = video.videoWidth;
+        const height = video.videoHeight;
+        canvas.width = width;
+        canvas.heigth = height;
+
+        console.log(video.videoHeight, video.videoWidth);
+
+        return setInterval(() => {
+            ctx.drawImage(video, 0, 0, width, height);
+
+            // manipulate image 
+            let rawImage = ctx.getImageData(0, 0, width, height);
+            console.log(rawImage.data);
+            
+           // console.log(rawImage)
+            // for(let i = 0; i<height; i++){
+            //     for(let j = 0)
+            // }
+
+            // console.log(`red image`);
+            // for(let i = 0; i<rawImage.data[0].length; i++)
+            //     console.log(rawImage.data[])
+
+            // console.log
+            
+            var colorList = document.querySelectorAll("input");
+            
+            var red = colorList[0].value;
+            var green = colorList[1].value;
+            var blue = colorList[2].value;
+            console.log(`RGB ( ${red}, ${green}, ${blue} )`);
+
+
+            for(let i = 0; i<rawImage.data.length; i = i + 4){
+                rawImage.data[i] += red;
+                rawImage.data[i+1] += green;
+                rawImage.data[i+2] += blue;
+                 
+            }
+            ctx.putImageData(rawImage, 0, 0);
+
+
+
+        }, 160);
+
+        // console.log("Does this function works?")
+        // takePhoto();
+
 
     }
-    getVideo();
+
+
+    function takePhoto() {
+
+        // play sound
+        snap.currentTime = 0;
+        snap.play();
+
+
+        // take screen shot
+        const data = canvas.toDataURL('image/jpeg');
+        const link = document.createElement('a');
+        console.log(data);
+
+        link.href = data;
+        link.setAttribute('download', 'handsome');
+        //link.textContent = 'Download Image';
+        link.innerHTML = `<img src="${data}" alt="Handsome man"/>`;
+        console.log(link);
+        console.log(link.innerHTML);
+        strip.insertBefore(link, strip.firstChild);
+    }
+   
+
+    
+            
+    // var imageCapture;
+
+    // ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // video.addEventListener('play', () => {
+    //     ctx.drawImage(this, 0, 0);
+    // })
+
+
+    // var image = document.getElementById('source');
+
+    // image.addEventListener("load", e => {
+    //     ctx.drawImage(image);
+    // })
+
+
+    // function getVideo() {
+    //     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    //         .then(localMediaStream => {
+    //             // console.log(localMediaStream);
+    //             // console.log(navigator);
+    //             video.srcObject = localMediaStream;
+    //             video.play();
+    //             // console.log(localMediaStream);
+    //             // console.log(typeof localMediaStream);
+
+    //             // It will return MediaStreamTrack objects
+    //             var webcam_tracks = localMediaStream.getVideoTracks();
+    //             var video_webcam = webcam_tracks[0];
+
+    //             //console.log(video_webcam);
+
+    //             // const capabilities = video_webcam.getCapabilities();
+    //             console.log("Video track : ", video_webcam);
+
+    //             // console.log(video_webcam)
+
+    //             imageCapture = new ImageCapture(video_webcam);
+    //             // ctx.drawImage(imageCapture, 0, 0);
+    //             console.log(imageCapture);
+    //             console.log("Image captured");
+
+    //             // console.log(imageCapture);
+    //             // conosole.log(typeof imageCapture);
+
+
+
+
+    //         })
+    //         .catch(err => {
+    //             console.error("Oh NO!!", err);
+    //         });
+    //     // console.log(promise);
+    //     // console.log(typeof promise);
+    // }
+    // getVideo();
+
+
+    // function take_Photo() {
+    //     imageCapture.takePhoto().then(blob => {
+    //         let url = window.URL.createObjectURL(blob);
+    //         image.src = url;
+
+    //         window.URL.revokeObjectURL(url);
+    //     })
+    //         .catch(error => {
+    //             console.log("Error in capturing image");
+    //         });
+    // };
+
+    // take_Photo();
     // video.addEventListener('canplay', )
+
+    // function startWebCam() {
+    //     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    //         .then(localMediaStream => {
+
+    //             video.srcObject = localMediaStream;
+    //             video.play();
+
+    //             // var webcam_tracks = localMediaStream.getVideoTracks();
+    //             // var video_webcam = webcam_tracks[0];
+
+
+    //             // console.log("Video track : ", video_webcam);
+
+
+
+    //             // imageCapture = new ImageCapture(video_webcam);
+
+    //             // console.log(imageCapture);
+    //             // console.log("Image captured");
+    //         })
+    //         .catch(err => {
+    //             console.error("Oh NO!!", err);
+    //         });
+    //     // console.log(promise);
+    //     // console.log(typeof promise);
+    // }
+
+    // function snapshot() {
+    //     ctx.drawImage(imageCapture, 0, 0, photo.width, photo.height);
+    // }
+
+
+
+    startWebCam();
+    video.addEventListener('canplay', paintToCanvas);
+    // paintToCanvas();
+    // snapshot();
 </script>
 
 </html>

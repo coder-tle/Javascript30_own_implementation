@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<body>
+    <div class="words" contenteditable>
+
+    </div>
+
+    <script>
+        var recognizedText = document.querySelector(".words");
+        window.SpeechRecognition = window.SpeechGrammar || window.webkitSpeechRecognition;
+        // console.log(window.SpeechRecognition);
+        // console.log(typeof window.SpeechRecognition);
+        SpeechRecognition.interimResults = true;
+        SpeechRecognition.continuous = true;
+
+
+        const recognition = new SpeechRecognition();
+        // console.log(recognition);
+        // console.log(typeof recognition);
+
+        
+
+        recognition.addEventListener('audiostart', (e)=>{
+            console.log("audio capturing started");
+            //recognition.start();
+            // console.log(e);
+            // console.log(typeof e);
+        });
+
+        recognition.addEventListener('audioend', (e)=>{
+            console.log("audio capturing has end");
+            // recognition.start();
+            // console.log(e);
+            // console.log(typeof e);
+        });
+
+        recognition.addEventListener('result', (event)=>{
+            console.log(event);
+            console.log(event.results[0][0].transcript);
+
+            var res = recognizedText.innerHTML ;
+            res  = (res +  `<p>${event.results[0][0].transcript}</p>`);
+            recognizedText.innerHTML = res;
+        });
+
+        recognition.addEventListener('end', recognition.start);
+
+
+
+        recognition.start();
+
+        // var SpeechRecognition =  SpeechRecognition ;
+        // var recognition = new SpeechRecognition();
+
+        // recognition.onstrat = function(){
+        //     console.log("WE are listening, speak in microphone!");
+        // };
+
+        // recognition.onspeechend = function(){
+        //     recognition.stop();
+        // }
+
+        // recognition.onresult = function(event){
+        //     console.log("inside recognition result");
+        // }
+
+        // console.log(wordExtracter);
+
+        // recognition.start();
+    </script>
+<style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+    }
+    
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+  </style>
+</body>
+</html>

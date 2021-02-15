@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Follow Along</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
@@ -30,23 +31,56 @@
         </p>
 
         <p>
-            Cum ipsam quod, incidunt sit ex tempore placeat maxime
-            corrupti possimus veritatis ipsum fugit recusandae est
-            doloremque? Hic, quibusdam, nulla.
+            Cum ipsam quod, incidunt sit ex <a href>tempore</a> placeat maxime
+            <a href>corrupti</a> possimus <a href>veritatis</a> ipsum fugit recusandae est
+            doloremque? Hic, <a href>quibusdam</a>, nulla.
         </p>
 
         <p>
-            Esse quibusdam, ad, ducimus cupiditate nulla, quae magni
-            odit totam ut consequatur eveniet sunt quam provident
+            Esse quibusdam, ad, ducimus cupiditate <a href>nulla</a>, quae magni
+            odit <a href>totam</a> ut consequatur eveniet sunt quam provident
             sapiente dicta neque quod
         </p>
 
         <p>
-            Aliquam dicta sequi culpa fugiat consequuntur pariatur 
-            optio ad minima, maxime odio, distinctio magni impedit
-            tempore enim repellendus repudiandae quas!
+            Aliquam <a href>dicta</a> sequi culpa fugiat <a href>consequuntur</a> pariatur 
+            optio ad minima, maxime <a href>odio</a>, distinctio magni impedit
+            tempore enim repellendus <a href>repudiandae</a> quas!
         </p>
 
     </div>
+    <span class="highlight" ></span>
+    <script>
+        const links = document.querySelectorAll('a');
+        var high_light = document.querySelector(".highlight");
+        // console.log(high_light);
+
+        function highlight(){
+            console.log(this);  
+            const target = this.getBoundingClientRect();
+            console.log(target);
+
+            high_light.style.width = `${target.width}px`;
+            high_light.style.height = `${target.height}px`;
+            high_light.style.transform = `translate(${target.left}px, ${target.top}px)`;
+        
+        }
+
+        links.forEach(a=>a.addEventListener('mousemove', highlight));
+            
+        //     console.log("Mouse on the link");
+            
+        //     const target = e.getBoundingClientRect();
+        //     console.log(target);
+            
+        //     // console.log(e);
+        //     // console.log(`X co-ordinate ${e.clientX} Y co-ordinate ${e.clientY}`);
+        //     // high_light.style.height = 20;
+        //     // high_light.style.widht = 10 ;
+        //     // high_lighkt.style.transform = `translateX(${e.clientX}px) translateY(${e.clientY}px)`;
+
+        // }));
+    </script>
+  
 </body>
 </html>

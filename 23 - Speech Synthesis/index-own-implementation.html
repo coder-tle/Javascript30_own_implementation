@@ -47,7 +47,40 @@
 </body>
 
 <script>
+    const start = document.getElementById('speak');
+    const stop = document.getElementById('stop');
+
+    start.addEventListener('click', startAudio);
+    stop.addEventListener('click', stopAudio);
+
+    function startAudio(e){
+        console.log("Speech start button pressed");
+        console.log(e);
+    }
+
+    function stopAudio(e){
+        console.log("Speech audio stop button pressed");
+        console.log(e);
+    }
+
+
+
+    var synth = window.speechSynthesis;
+    var text = document.querySelector()
+
+    // var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+    // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+    // var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+    // // console.log(SpeechRecognition);
+    // // var SpeechRecognition = SpeechRecognition;
+    // var recognition = new SpeechRecognition();
+    // var SpeechRecognitionList = new SpeechGrammarList();
+
+
+    // console.log(recognition);
+    // console.log(SpeechRecognitionList);
     
+
 </script>
 
 </html>

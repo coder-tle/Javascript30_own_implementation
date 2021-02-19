@@ -1,72 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Text To Speech</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
-        .box{
-            display: flex;
-            flex-direction: column;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: rgb(211, 216, 216);
-        }
-        .box >*{
-            flex-grow: 1;
-        }
-        .heading{
-            width: auto;
-            margin: auto;
-        }
+      .box {
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgb(211, 216, 216);
+      }
+      .box > * {
+        flex-grow: 1;
+      }
+      .heading {
+        width: auto;
+        margin: auto;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="box">
-        <h1 class="heading">The Voiceinator 5000</h1>
+      <h1 class="heading">The Voiceinator 5000</h1>
 
-        <select name="voice" id="voices">
-            <option value="Google US English">Google US English (en-US)</option>
-            <option value="Google UK English Female">Google UK English Female (en-GB)</option>
-            <option value="Google UK English Male">Google UK English Male (en-GB)</option>
-        </select>
-        <label for="rate">Rate:</label>
-        <input type="range"  name="rate" min="0" max="3" value="1" step="0.1">
-        
-        <label for="pitch">Pitch:</label>
-        <input  type="range" name="pitch" min="0" max="2" step="0.1">
+      <select name="voice" id="voices">
+        <option value="Google US English">Google US English (en-US)</option>
+        <option value="Google UK English Female">
+          Google UK English Female (en-GB)
+        </option>
+        <option value="Google UK English Male">
+          Google UK English Male (en-GB)
+        </option>
+      </select>
+      <label for="rate">Rate:</label>
+      <input type="range" name="rate" min="0" max="3" value="1" step="0.1" />
 
-        <textarea name="text" >Hello! I love Javascript 👍</textarea>
+      <label for="pitch">Pitch:</label>
+      <input type="range" name="pitch" min="0" max="2" step="0.1" />
 
-        <button id="stop">Stop!</button>
-        <button id="speak" >Speak</button>
+      <textarea name="text">Hello! I love Javascript 👍</textarea>
+
+      <button id="stop">Stop!</button>
+      <button id="speak">Speak</button>
     </div>
+  </body>
 
-</body>
+  <script>
+    const start = document.getElementById("speak");
+    const stop = document.getElementById("stop");
 
-<script>
-    const start = document.getElementById('speak');
-    const stop = document.getElementById('stop');
+    const rate = document.querySelector(`input[name="rate"]`);
+    const pitch = document.querySelector(`input[name="pitch"]`);
 
-    start.addEventListener('click', startAudio);
-    stop.addEventListener('click', stopAudio);
+    start.addEventListener("click", startAudio);
+    stop.addEventListener("click", stopAudio);
 
-    function startAudio(e){
-        console.log("Speech start button pressed");
-        console.log(e);
+    // function startAudio(e) {
+    //   console.log("Speech start button pressed");
+    //   console.log(e);
+    // }
+
+    function stopAudio(e) {
+      console.log("Speech audio stop button pressed");
+      console.log(e);
+      synth.cancel();
     }
-
-    function stopAudio(e){
-        console.log("Speech audio stop button pressed");
-        console.log(e);
-    }
-
-
 
     var synth = window.speechSynthesis;
-    var text = document.querySelector()
+    var text = document.querySelector("textarea");
+    // console.log(text.innerHTML);
+    // Web api Speech Synthesis is awesone.
+    // console.log(synth.getVoices());
+
+    function startAudio(e) {
+      console.log("Audio should start");
+      //   event.preventDefault();
+
+      //   console.log(text.value);
+      var utterThis = new SpeechSynthesisUtterance(text.value);
+      utterThis.pitch = pitch.value;
+      utterThis.rate = rate.value;
+      synth.speak(utterThis);
+
+      console.log(utterThis.pitch);
+      console.log(utterThis.rate);
+    }
 
     // var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
     // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
@@ -76,11 +98,7 @@
     // var recognition = new SpeechRecognition();
     // var SpeechRecognitionList = new SpeechGrammarList();
 
-
     // console.log(recognition);
     // console.log(SpeechRecognitionList);
-    
-
-</script>
-
+  </script>
 </html>

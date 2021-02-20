@@ -29,12 +29,13 @@
 
       <select name="voice" id="voices">
         <option value="Google US English">Google US English (en-US)</option>
-        <option value="Google UK English Female">
+        <!--<option value="Google UK English Female">
           Google UK English Female (en-GB)
         </option>
         <option value="Google UK English Male">
           Google UK English Male (en-GB)
         </option>
+        -->
       </select>
       <label for="rate">Rate:</label>
       <input type="range" name="rate" min="0" max="3" value="1" step="0.1" />
@@ -53,11 +54,14 @@
     const start = document.getElementById("speak");
     const stop = document.getElementById("stop");
 
+    const voice_list = document.getElementById("voices");
     const rate = document.querySelector(`input[name="rate"]`);
     const pitch = document.querySelector(`input[name="pitch"]`);
 
     start.addEventListener("click", startAudio);
     stop.addEventListener("click", stopAudio);
+
+    var voices = [];
 
     // function startAudio(e) {
     //   console.log("Speech start button pressed");
@@ -75,20 +79,38 @@
     // console.log(text.innerHTML);
     // Web api Speech Synthesis is awesone.
     // console.log(synth.getVoices());
+    var utterThis = new SpeechSynthesisUtterance(text.value);
 
     function startAudio(e) {
       console.log("Audio should start");
       //   event.preventDefault();
 
       //   console.log(text.value);
-      var utterThis = new SpeechSynthesisUtterance(text.value);
+      utterThis = new SpeechSynthesisUtterance(text.value);
       utterThis.pitch = pitch.value;
       utterThis.rate = rate.value;
-      synth.speak(utterThis);
 
-      console.log(utterThis.pitch);
-      console.log(utterThis.rate);
+      console.log(voice_list.value);
+      // console.log(speechSynthesis.getVoices());
+
+      synth.speak(utterThis);
+      console.log(utterThis.voice);
+      // console.log(utterThis.pitch);
+      // console.log(utterThis.rate);
+      createVoiceList();
     }
+
+    function createVoiceList() {
+      voices = synth.getVoices();
+      // console.log(voices);
+      let i = 0;
+      voices.forEach((a) => {
+        // console.log(a);
+        voice_list.innerHTML += `<option data-name="${a.name}" data-lang="${a.lang}">${a.name} ( ${a.lang} )</option>`;
+      });
+      //console.log(voice_list);
+    }
+    createVoiceList();
 
     // var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
     // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList

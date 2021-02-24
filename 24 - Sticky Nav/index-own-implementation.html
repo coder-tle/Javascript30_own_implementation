@@ -7,6 +7,7 @@
     <title>Sticky Nav</title>
     <style>
       html {
+        box-sizing: border-box;
         font-family: "helvetica neue";
         font-size: 20px;
         font-weight: 200;
@@ -19,10 +20,14 @@
         margin-right: auto; */
         /* width: 100%; */
         display: flex;
-        background: blue;
+        height: 50vh;
+        background: url(https://source.unsplash.com/GKN6rpDr0EI/960x640) bottom
+          center no-repeat;
+        background-size: cover;
         /* height: 10em; */
         justify-content: center;
         text-align: center;
+        align-items: center;
         /* align-items: center; */
         /* align-items: baseline; */
 
@@ -30,6 +35,9 @@
       }
       header h1 {
         display: block;
+        color: white;
+        font-size: 7vw;
+        text-shadow: 3px 4px 0 rgb(0, 0, 0, 0.2);
         /* margin-left: auto;
         margin-right: auto; */
         /* vertical-align: middle; */
@@ -37,11 +45,20 @@
         /* text-align: center; */
       }
       .nav-bar {
+        overflow: hidden;
+        top: 0;
+        width: 100%;
+        transition: all 0.5s;
+        position: relative;
+        z-index: 1;
         /* display: flex; */
         background-color: aqua;
         /* flex-direction: row; */
       }
       .nav-bar > ul {
+        margin: 0;
+        padding: 0;
+
         display: flex;
         /* justify-content: center;
         align-items: center; */
@@ -62,11 +79,25 @@
       }
       .site-wrap {
         background: burlywood;
-        padding: 40px;
+        /* padding: 40px;
         margin-top: 100px;
         margin-bottom: 100px;
         margin-left: 40px;
-        margin-right: 40px;
+        margin-right: 40px; */
+        max-width: 700px;
+        margin: 70px auto;
+        /* backgrouknd: white; */
+        padding: 40px;
+        text-align: justify;
+        box-shadow: 0 0 10px 5px rgb(0, 0, 0, 0.2);
+        transform: scale(0.98);
+        transition: transform 0.5s;
+      }
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        box-shadow: 0 5px 0 rgba(0, 0, 0 0.1);
       }
     </style>
   </head>
@@ -216,5 +247,27 @@
         Aliquam rerum omnis a, quam doloremque architecto ex dolorem.
       </p>
     </div>
+
+    <script>
+      window.onscroll = function () {
+        myFunction();
+      };
+
+      var navbar = document.querySelector("nav");
+
+      var sticky = navbar.offsetTop;
+
+      function myFunction() {
+        console.log(
+          " distance of nav bar from start of doc: " + window.pageYOffset
+        );
+        console.log(`distance of navbar from top of document : ${sticky}`);
+        if (window.pageYOffset >= sticky) {
+          navbar.classList.add("sticky");
+        } else {
+          navbar.classList.remove("sticky");
+        }
+      }
+    </script>
   </body>
 </html>

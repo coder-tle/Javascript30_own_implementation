@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stripe</title>
+    <style>
+        img{
+            display:block;
+            width: 30%;
+            height: 30%;
+        }
+        .top{
+            background: rgb(26, 212, 245);
+            /* display: flex;
+            flex-grow: row; */
+        }
+        nav .cool{
+          background: pink;
+          display: flex;
+          flex-grow: row;
+          
+        }
+        nav .cool > li{
+          flex: 1;
+        }
+    </style>
+  </head>
+  <body>
+    <h2>Cool</h2>
+
+    <nav class="top">
+      <ul class="cool">
+            <li><a href="https://twitter.com/sarfaraznitj">About Me</a>
+        <img src="img.jpeg" alt="profile photo" />
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+        fuga eveniet facilis facere hic reprehenderit? Rerum, ut voluptate cum
+        ab voluptates eligendi autem ea enim, possimus reiciendis ducimus culpa
+        nihil.
+            </li>
+
+
+            <li><a href="https://twitter.com/sarfaraznitj">Courses</a>
+        <ul class="dropdown courses">
+          <li>
+            <span>RFB</span
+            ><a href="https://twitter.com/sarfaraznitj">React For Beginners</a>
+          </li>
+          <li><span>ES6</span><a href="https://twitter.com/sarfaraznitj">  ES6 For Everyone</a></li>
+
+          <li><span>NODE</span><a href="https://twitter.com/sarfaraznitj">  Sublime Text Power User</a></li>
+          <li><span>STPU</span><a href="https://twitter.com/sarfaraznitj">  What The Flexbox?!</a></li>
+          <li><span>WTF</span><a href="https://twitter.com/sarfaraznitj">  Learn Node</a></li>
+          <li><span>GRID</span><a href="https://twitter.com/sarfaraznitj">  CSS Grid</a>
+          </li>
+          <li><span>LRX</span><a href="https://twitter.com/sarfaraznitj">  Learn Redux</a></li>
+
+          <li><span>CLPU</span><a href="https://twitter.com/sarfaraznitj">  Command Line Power User</a></li>
+          <li><span>MMD</span><a href="https://twitter.com/sarfaraznitj">  Mastering Markdown</a></li>
+        </ul>
+            </li>
+
+    <li><a href="https://github.com/coder-tle">Other Links</a>
+        <ul class="dropdown dropdown3">
+            <li><a href="https://twitter.com/sarfaraznitj">Twitter</a></li>
+            <li><a href="https://linkedin.com/sarfaraznitj">LinkedIn</a></li>
+            <li><a href="https://linkedin.com/sarfaraznitj">Facebook</a></li>
+            <li><a href="https://linkedin.com/sarfaraznitj">Course Catalog</a></li>
+        </ul>
+    </li>
+        <!-- <li> -->
+          <!-- <a href="https://linkedin.com/sarfaraznitj"></a>
+          <ul class="dropdown dropdown3">
+            <li><a href="https://twitter.com/sarfaraznitj"></a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </body>
+  <script>
+    let navTabs = document.querySelectorAll(".cool > li > a");
+    console.log(navtabs)
+  </script>
+</html>

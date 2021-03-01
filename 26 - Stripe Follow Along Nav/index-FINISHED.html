@@ -6,6 +6,9 @@
   </head>
   <body>
     <h2>Cool</h2>
+    <h2>Hello Javascript</h2>
+    <h2>Hello Javascript</h2>
+    <h2>Hello Javascript</h2>
     <nav class="top">
       <div class="dropdownBackground">
         <span class="arrow"></span>
@@ -264,7 +267,7 @@
       const triggers = document.querySelectorAll(".cool > li");
       const background = document.querySelector(".dropdownBackground");
       const nav = document.querySelector(".top");
-
+      // const nav_bar = document.querySelectorAll(".cool");
       function handleEnter() {
         this.classList.add("trigger-enter");
         setTimeout(
@@ -278,6 +281,7 @@
         const dropdown = this.querySelector(".dropdown");
         const dropdownCoords = dropdown.getBoundingClientRect();
         const navCoords = nav.getBoundingClientRect();
+        // const nav_bar_Coords = nav_bar.getBoundingClientRect();
 
         const coords = {
           height: dropdownCoords.height,

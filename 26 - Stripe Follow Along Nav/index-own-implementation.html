@@ -6,190 +6,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stripe</title>
     <style>
-        html{
-            background: rgb(200, 230, 180);
-        }
-        img{
-            display:block;
-            width: 30%;
-            height: 30%;
-        }
-        .top{
-            background: rgb(26, 212, 245);
-            /* display: flex;
+      html {
+        box-sizing: border-box;
+        background: rgb(200, 230, 180);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(
+            45deg,
+            hsla(340, 100%, 55%, 1) 0%,
+            hsla(340, 100%, 55%, 0) 70%
+          ),
+          linear-gradient(
+            135deg,
+            hsla(225, 95%, 50%, 1) 10%,
+            hsla(225, 95%, 50%, 0) 80%
+          ),
+          linear-gradient(
+            225deg,
+            hsla(140, 90%, 50%, 1) 10%,
+            hsla(140, 90%, 50%, 0) 80%
+          ),
+          linear-gradient(
+            315deg,
+            hsla(35, 95%, 55%, 1) 100%,
+            hsla(35, 95%, 55%, 0) 70%
+          );
+      }
+      h2 {
+        margin-top: 0;
+        padding-top: 60px;
+      }
+      nav {
+        position: relative;
+        perspective: 600px;
+      }
+      /* nav ul{
+            list-style: none;
+            margin: 0;
+            padding
+        } */
+      img {
+        display: block;
+        width: 30%;
+        height: 30%;
+      }
+      .top {
+        background: rgb(26, 212, 245);
+        /* display: flex;
             flex-grow: row; */
-        }
-        nav .cool{
-          background: pink;
-          display: flex;
-          flex-grow: row;
-          
-        }
-        nav .cool > li{
-          flex: 1;
-        }
-        .highlight{
-            background: rgb(202, 195, 195);
-            /* width: 200px;
+      }
+      nav .cool {
+        background: pink;
+        display: flex;
+        flex-grow: row;
+      }
+      nav .cool > li {
+        flex: 1;
+      }
+      .highlight {
+        background: rgb(202, 195, 195);
+        /* width: 200px;
             height: 300px; */
-            z-index: 1;
-        }
-        .dropdown{
-            opacity: 0;
-            position : absolute;
-            overflow: hidden;
-            padding: 20px;
-            top : -20px;
-            border-radius: 2px;
-            transition: all 0.5s;
-            transform: translateY(100px);
+        z-index: 1;
+      }
+      .dropdown {
+        opacity: 0;
+        position: absolute;
+        overflow: hidden;
+        padding: 20px;
+        top: -20px;
+        border-radius: 2px;
+        transition: all 0.5s;
+        transform: translateY(100px);
 
-            will-change: opacity;
-            display: none;
-
-        }
-        .dropdownBackground {
+        will-change: opacity;
+        display: none;
+      }
+      .dropdownBackground {
         width: 100px;
         height: 100px;
         position: absolute;
         background: #fff;
         border-radius: 4px;
-        box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
+        /* box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
           0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s, opacity 0.1s, transform 0.2s;
-        transform-origin: 50% 0;
+        transition: all 0.3s, opacity 0.1s, transform 0.2s; */
+        /* transform-origin: 50% 0; */
         display: flex;
         justify-content: center;
         opacity: 0;
+        z-index: 1;
+        color: rgb(226, 213, 31);
+        transform: translate(100px, 100px);
       }
-        .dropdownBackground .open{
-            opacity: 1;
-        }
-        .trigger-enter .dropdown{
-            
-            opacity: 1;
-        }
-        .trigger-enter-active .dropdown{
-            display: block;
-            
-        }
-
-        /* .active {
-            display: ;
-        } */
-        /* .trigger-enter .dropdown{
-            display: block;
-        } */
+      .open {
+        opacity: 1;
+        background: cadetblue;
+      }
+      .trigger-enter .dropdown {
+        opacity: 1;
+      }
+      .trigger-enter-active .dropdown {
+        display: block;
+      }
     </style>
   </head>
   <body>
     <h2>Cool</h2>
 
     <nav class="top">
-        <div class="dropdownBackground">
-            <span class="arrow"></span>
-          </div>
+      <div class="dropdownBackground">
+        Hello I am the problem
+        <span class="arrow"></span>
+      </div>
       <ul class="cool">
-            <li ><a href="https://twitter.com/sarfaraznitj">About Me</a>
-        <div class="dropdown">
+        <li>
+          <a href="https://twitter.com/sarfaraznitj">About Me</a>
+          <div class="dropdown">
             <img src="img.jpeg" alt="profile photo" />
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-            fuga eveniet facilis facere hic reprehenderit? Rerum, ut voluptate cum
-            ab voluptates eligendi autem ea enim, possimus reiciendis ducimus culpa
-            nihil.
-        </div>
-              
+            fuga eveniet facilis facere hic reprehenderit? Rerum, ut voluptate
+            cum ab voluptates eligendi autem ea enim, possimus reiciendis
+            ducimus culpa nihil.
+          </div>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/sarfaraznitj">Courses</a>
+          <ul class="dropdown courses">
+            <li>
+              <span>RFB</span
+              ><a href="https://twitter.com/sarfaraznitj"
+                >React For Beginners</a
+              >
+            </li>
+            <li>
+              <span>ES6</span
+              ><a href="https://twitter.com/sarfaraznitj"> ES6 For Everyone</a>
             </li>
 
-
-            <li><a href="https://twitter.com/sarfaraznitj">Courses</a>
-        <ul class="dropdown courses">
-          <li>
-            <span>RFB</span
-            ><a href="https://twitter.com/sarfaraznitj">React For Beginners</a>
-          </li>
-          <li><span>ES6</span><a href="https://twitter.com/sarfaraznitj">  ES6 For Everyone</a></li>
-
-          <li><span>NODE</span><a href="https://twitter.com/sarfaraznitj">  Sublime Text Power User</a></li>
-          <li><span>STPU</span><a href="https://twitter.com/sarfaraznitj">  What The Flexbox?!</a></li>
-          <li><span>WTF</span><a href="https://twitter.com/sarfaraznitj">  Learn Node</a></li>
-          <li><span>GRID</span><a href="https://twitter.com/sarfaraznitj">  CSS Grid</a>
-          </li>
-          <li><span>LRX</span><a href="https://twitter.com/sarfaraznitj">  Learn Redux</a></li>
-
-          <li><span>CLPU</span><a href="https://twitter.com/sarfaraznitj">  Command Line Power User</a></li>
-          <li><span>MMD</span><a href="https://twitter.com/sarfaraznitj">  Mastering Markdown</a></li>
-        </ul>
+            <li>
+              <span>NODE</span
+              ><a href="https://twitter.com/sarfaraznitj">
+                Sublime Text Power User</a
+              >
+            </li>
+            <li>
+              <span>STPU</span
+              ><a href="https://twitter.com/sarfaraznitj">
+                What The Flexbox?!</a
+              >
+            </li>
+            <li>
+              <span>WTF</span
+              ><a href="https://twitter.com/sarfaraznitj"> Learn Node</a>
+            </li>
+            <li>
+              <span>GRID</span
+              ><a href="https://twitter.com/sarfaraznitj"> CSS Grid</a>
+            </li>
+            <li>
+              <span>LRX</span
+              ><a href="https://twitter.com/sarfaraznitj"> Learn Redux</a>
             </li>
 
-    <li><a href="https://github.com/coder-tle">Other Links</a>
-        <ul class="dropdown dropdown3">
+            <li>
+              <span>CLPU</span
+              ><a href="https://twitter.com/sarfaraznitj">
+                Command Line Power User</a
+              >
+            </li>
+            <li>
+              <span>MMD</span
+              ><a href="https://twitter.com/sarfaraznitj">
+                Mastering Markdown</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="https://github.com/coder-tle">Other Links</a>
+          <ul class="dropdown dropdown3">
             <li><a href="https://twitter.com/sarfaraznitj">Twitter</a></li>
             <li><a href="https://linkedin.com/sarfaraznitj">LinkedIn</a></li>
             <li><a href="https://linkedin.com/sarfaraznitj">Facebook</a></li>
-            <li><a href="https://linkedin.com/sarfaraznitj">Course Catalog</a></li>
-        </ul>
-    </li>
-       
+            <li>
+              <a href="https://linkedin.com/sarfaraznitj">Course Catalog</a>
+            </li>
           </ul>
         </li>
       </ul>
     </nav>
-    <div class="highlight">
-        highlight
-    </div>
   </body>
   <script>
     let navTabs = document.querySelectorAll(".cool > li");
-    let highlight_div = document.querySelector(".highlight"); 
-    let background = document.querySelector('.dropdownBackground');
+    let highlight_div = document.querySelector(".highlight");
+    let background_ = document.querySelector(".dropdownBackground");
     // console.log(navTabs);
 
-    navTabs.forEach(a=>{
-        a.addEventListener('mouseenter', handleEnter);
-        a.addEventListener('mouseleave', handleLeave);
+    navTabs.forEach((a) => {
+      a.addEventListener("mouseenter", handleEnter);
+      a.addEventListener("mouseleave", handleLeave);
     });
 
-    function handleEnter(){
-        console.log("Mouse enter");
-        console.log(this);
-        // let target = this.querySelector(".dropdown");
-        // console.log(target);
-        this.classList.add("trigger-enter");
-        background.classList.add('open');
-        setTimeout(()=> this.classList.contains('trigger-enter')&&this.classList.add('trigger-enter-active'), 150);
-        // setTimeout( ()=> {
-        //     // console.log("setTimeOut activated");
-        //     // console.log(this);
-        //     // let target = this.querySelector(".dropdown");
-        //     // console.log(target);
-        //     target.classList.add("active")}
-        //     , 150);
+    function handleEnter() {
+      console.log("Mouse enter");
+      // console.log(this);
+      // let target = this.querySelector(".dropdown");
+      // console.log(target);
+      this.classList.add("trigger-enter");
+      background_.classList.add("open");
+
+      setTimeout(
+        () =>
+          this.classList.contains("trigger-enter") &&
+          this.classList.add("trigger-enter-active"),
+        150
+      );
+
+      let dropdown = this.querySelector(".dropdown");
+      console.log(dropdown);
+      let dropdownCoords = dropdown.getBoundingClientRect();
+      // let navCoords = nav.getBoundingClientRect();
+
+      const coords = {
+        height: dropdownCoords.height,
+        width: dropdownCoords.width,
+        top: dropdownCoords.top,
+        left: dropdownCoords.left,
+      };
+
+      background_.style.setProperty("width", `${coords.width}px`);
+      background_.style.setProperty("height", `${coords.height}px`);
+      background_.style.setProperty(
+        "transform",
+        `translate(${coords.left}px, ${coords.top}px)`
+      );
+      // setTimeout( ()=> {
+      //     // console.log("setTimeOut activated");
+      //     // console.log(this);
+      //     // let target = this.querySelector(".dropdown");
+      //     // console.log(target);
+      //     target.classList.add("active")}
+      //     , 150);
     }
 
-    function handleLeave(){
-        console.log("Mouse leave");
-        // let target = this.querySelector(".dropdown");
-        this.classList.remove("trigger-enter", "trigger-enter-active");
-        background.classList.remove('open');
-
+    function handleLeave() {
+      console.log("Mouse leave");
+      // let target = this.querySelector(".dropdown");
+      this.classList.remove("trigger-enter", "trigger-enter-active");
+      background_.classList.remove("open");
     }
 
-    function foo1(){
-        // console.log(this);
-        // console.log(this.getBoundingClientRect());
-        let target = this.getBoundingClientRect();
-        let x = this.getBoundingClientRect().left ;
-        let y = this.getBoundingClientRect().top;
-        console.log(x, y);
+    function foo1() {
+      // console.log(this);
+      // console.log(this.getBoundingClientRect());
+      let target = this.getBoundingClientRect();
+      let x = this.getBoundingClientRect().left;
+      let y = this.getBoundingClientRect().top;
+      console.log(x, y);
 
-        
-        highlight_div.style.width = `${target.width}px`;
-        highlight_div.style.height = `${target.height}px`;
-        
-        highlight_div.style.transform = `translateX(${x}px) translateY(${(y)}px)`;
+      // background.style.width = `${target.width}px`;
+      // background.style.height = `${target.height}px`;
 
+      // background.style.transform = `translateX(${x}px) translateY(${y}px)`;
     }
-
   </script>
 </html>

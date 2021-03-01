@@ -1,0 +1,15 @@
+items {
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+item {
+  flex: 0 0 auto;
+  width: auto;
+  height: 200px;
+  max-width: 100%;
+
+  /* display: block; */
+}

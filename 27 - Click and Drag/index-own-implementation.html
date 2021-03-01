@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Own-Click & Drag</title>
+    <style>
+      .items {
+        padding-top: 300px;
+        display: flex;
+        /* flex-direction: row; */
+        flex-wrap: nowrap;
+        overflow-x: auto;
+      }
+
+      .item {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 200px;
+        max-width: 100%;
+        border: 2px solid;
+        padding: 20px;
+        /* text-align: center; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* justify-content: center;
+              align-items: center; */
+        /* display: block; */
+      }
+
+      .items > div:nth-of-type(odd) {
+        background: #e9db14;
+        transform: scaleX(1.31) rotateY(-40deg);
+      }
+
+      .items > div:nth-of-type(even) {
+        background: #14e9e9;
+        transform: scaleX(1.31) rotateY(40deg);
+      }
+      .items.active {
+        background: rgba(255, 255, 255, 0.3);
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        transform: scale(1);
+      }
+
+      /* .item:nth-child(even) {
+              transform: scaleX(1.31) rotateY(40deg);
+            }
+            .item:nth-child(odd) {
+              transform: scaleX(1.31) rotateY(-40deg);
+            } */
+
+      /* div {
+              height: 100px;
+              background-color: aqua;
+            } */
+    </style>
+    <!--<link rel="stylesheet" href="own-style.css" /> -->
+  </head>
+  <body>
+    <div class="items">
+      <div class="item item1">01</div>
+      <div class="item item2">02</div>
+      <div class="item item3">03</div>
+      <div class="item item4">04</div>
+      <div class="item item5">05</div>
+
+      <div class="item item6">06</div>
+      <div class="item item7">07</div>
+      <div class="item item8">08</div>
+      <div class="item item9">09</div>
+      <div class="item item10">10</div>
+
+      <div class="item item11">11</div>
+      <div class="item item12">12</div>
+      <div class="item item13">13</div>
+      <div class="item item14">14</div>
+      <div class="item item15">15</div>
+
+      <div class="item item16">16</div>
+      <div class="item item17">17</div>
+      <div class="item item18">18</div>
+      <div class="item item19">19</div>
+      <div class="item item20">20</div>
+
+      <div class="item item21">21</div>
+      <div class="item item22">22</div>
+      <div class="item item23">23</div>
+      <div class="item item24">24</div>
+      <div class="item item25">25</div>
+    </div>
+
+    <script>
+      let divs = document.querySelectorAll(".item");
+
+      divs.forEach((a) => {
+        a.addEventListener("click", raise);
+      });
+
+      function raise() {
+        this.classList.add("active");
+      }
+      console.log(divs);
+    </script>
+  </body>
+</html>

@@ -53,7 +53,14 @@
     const wrapper_ = document.querySelector(".wrapper");
     const speed_ = wrapper_.querySelector(".speed");
     const speed_bar = speed_.querySelector(".speed-bar");
+    var video_ = document.querySelector("video");
     var isInside;
+
+    var top_position = speed_bar.offsetTop;
+    var height_speed = speed_bar.offsetTop;
+
+    var rangeValue = height_speed;
+    var step_value = 3.2 / rangeValue;
 
     console.log(speed_bar);
     speed_bar.addEventListener("mousemove", getPosition);
@@ -72,7 +79,13 @@
       if (!isInside) return;
       console.log("Mouse is moving");
 
-      console.log(e.pageX);
+      console.log(`Mouse  mouse : ${e.pageY}`);
+      console.log(`OffsetTop : ${speed_bar.offsetTop}`);
+      console.log(`OffsetHeight : ${speed_bar.offsetHeight}`);
+
+      let increment = e.pageY - speed_bar.offsetTop;
+
+      video_.playbackRate = Math.round(step_value * increment);
     }
   </script>
 </html>

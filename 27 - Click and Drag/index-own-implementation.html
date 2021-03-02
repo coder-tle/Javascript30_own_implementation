@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Own-Click & Drag</title>
-    <style>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <style>
       .items {
         padding-top: 300px;
+        padding-bottom: 200px;
         display: flex;
         /* flex-direction: row; */
         flex-wrap: nowrap;
@@ -29,15 +31,23 @@
               align-items: center; */
         /* display: block; */
       }
-
+      .items:hover {
+        cursor: pointer;
+      }
+      .items:active {
+        transition: all 0.1s;
+        transform: scale(1.2, 1.2);
+        cursor: grab;
+        scroll-behavior: smooth;
+      }
       .items > div:nth-of-type(odd) {
         background: #e9db14;
-        transform: scaleX(1.31) rotateY(-40deg);
+        transform: scaleX(1.31) rotate(-10deg);
       }
 
       .items > div:nth-of-type(even) {
         background: #14e9e9;
-        transform: scaleX(1.31) rotateY(40deg);
+        transform: scaleX(1.31) rotate(10deg);
       }
       .items.active {
         background: rgba(255, 255, 255, 0.3);
@@ -57,7 +67,7 @@
               height: 100px;
               background-color: aqua;
             } */
-    </style>
+    </style> -->
     <!--<link rel="stylesheet" href="own-style.css" /> -->
   </head>
   <body>
@@ -94,16 +104,69 @@
     </div>
 
     <script>
-      let divs = document.querySelectorAll(".item");
+      const slider = document.querySelector(".items");
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let dir;
 
-      divs.forEach((a) => {
-        a.addEventListener("click", raise);
+      slider.addEventListener("mousedown", () => {
+        // console.log("Mouse down activated");
+        isDown = true;
+
+        // startX = event.pageX;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        console.log(`Mouse down start coordinates ${startX}`);
       });
 
-      function raise() {
-        this.classList.add("active");
-      }
-      console.log(divs);
+      slider.addEventListener("mouseleave", () => {
+        // console.log("mouse leave activated");
+        isDown = false;
+      });
+
+      // slider.addEventListener("mouseup", () => {
+      //   // console.log("mouse up activated");
+      //   isDown = false;
+
+      //   var step = event.pageX - startX;
+      //   dir = step > 0 ? 1 : -1;
+
+      //   if (dir === 1) console.log("Mouse moved towards right");
+      //   else console.log("mouse moved towards left");
+      // });
+      // slider.addEventListener("mousemove", (e) => {
+      //   if (!isDown) return; // stop the fn from running
+      //   e.preventDefault();
+      //   const x = e.pageX - slider.offsetLeft;
+      //   const walk = (x - startX) * 3;
+      //   slider.scrollLeft = scrollLeft - walk;
+      // });
+      slider.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+
+        // var step = e.pageX - startX;
+        // dir = step > 0 ? 1 : -1;
+
+        // if (dir === 1) console.log("Mouse moved towards right");
+        // else console.log("mouse moved towards left");
+        // // console.log("Mouse move activated");
+        // console.count(isDown);
+        // console.log("Do Work!!");
+        // slider.scrollLeft = scrollLeft + step;
+      });
+
+      // let divs = document.querySelectorAll(".item");
+
+      // divs.forEach((a) => {
+      //   a.addEventListener("click", raise);
+      // });
+
+      // function raise() {
+      //   this.classList.add("active");
+      // }
+      // console.log(divs);
     </script>
   </body>
 </html>

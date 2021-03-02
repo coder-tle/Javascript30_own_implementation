@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Speed controller</title>
+    <style>
+      .wrapper {
+        border: 2px solid red;
+        padding: 100px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .wrapper > * {
+        flex: 3;
+      }
+      video {
+        border: 2px solid rgb(123, 121, 238);
+        margin: 0;
+        padding: 0;
+        display: inline;
+      }
+      .speed {
+        border: 2px solid black;
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+      }
+      .speed-bar {
+        background: rgb(218, 215, 57);
+        flex: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <video
+        src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+        width="400"
+        height="250"
+        controls
+        muted
+      ></video>
+      <div class="speed">
+        <div class="speed-bar">1x</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const wrapper_ = document.querySelector(".wrapper");
+    const speed_ = wrapper_.querySelector(".speed");
+    const speed_bar = speed_.querySelector(".speed-bar");
+    var isInside;
+
+    console.log(speed_bar);
+    speed_bar.addEventListener("mousemove", getPosition);
+    speed_bar.addEventListener("mouseenter", notifyEnter);
+    speed_bar.addEventListener("mouseleave", notifyExit);
+
+    function notifyExit() {
+      console.log("Mouse left the div, make div in active to change");
+      isInside = false;
+    }
+    function notifyEnter() {
+      isInside = true;
+      console.log("mouse entered the div");
+    }
+    function getPosition(e) {
+      if (!isInside) return;
+      console.log("Mouse is moving");
+
+      console.log(e.pageX);
+    }
+  </script>
+</html>

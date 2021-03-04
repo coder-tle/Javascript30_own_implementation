@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form practise</title>
+  </head>
+  <body>
+    <h1>Form practise</h1>
+    <form name="form1" id="form1_id">
+      <input type="text" name="input1" placeholder="type something" value="" />
+    </form>
+  </body>
+  <script>
+    let form_ = document.getElementById("form1_id");
+    //let input_1 = document.querySelector("input");
+    //let value_;
+    form_.addEventListener("submit", fetchInput);
+    function fetchInput(e) {
+      e.preventDefault();
+      console.log(e);
+      console.log(form_.input1.value);
+
+      // value_ = input_1.value;
+    }
+    // console.log(input_1);
+    // console.log(value_);
+  </script>
+</html>

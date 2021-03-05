@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown Timer</title>
+    <link rel="stylesheet" href="style-own-implementation.css" />
   </head>
   <body>
     <div class="timer">
@@ -25,15 +26,22 @@
     </div>
   </body>
   <script>
+    let title_ = document.querySelectorAll("title");
     let buttons = document.querySelectorAll("button");
     let customForm = document.querySelector(`form[name="customForm"]`);
     let display_ = document.querySelector(`div[class='display']`);
     let time_left = display_.querySelector("h1");
     let end_time = display_.querySelector("p");
 
-    let duration;
+    var duration = 0;
     let ss, mm;
     let ss_timer, mm_timer;
+
+    let countDown;
+    let timeleft = 0;
+
+    var nowTime;
+
     buttons.forEach((b) => {
       b.addEventListener("click", setCountDown);
     });
@@ -41,11 +49,14 @@
     function setCountDown(e) {
       //   console.log(this);
       //   console.log(e);
-      duration = this.dataset.time;
+      duration = parseInt(this.dataset.time);
+
       console.log(`time of duration : ${duration}`);
-      mm = Math.round(duration / 60);
-      ss = duration % 60;
+      //mm = Math.round(duration / 60);
+      //ss = duration % 60;
       //startTimer();
+      console.log(typeof duration);
+      setTimer(duration);
     }
 
     customForm.addEventListener("submit", setCustomCountDown);
@@ -53,33 +64,74 @@
       e.preventDefault();
       //   console.log(this);
 
-      mm = this.minutes.value;
+      mm = parseInt(this.minutes.value);
       console.log(this.minutes.value);
       this.minutes.value = "";
       //startTimer();
+      duration = mm * 60;
+
+      setTimer(duration);
     }
 
-    function updateSeconds() {
-      console.log("update second done");
-      if (mm >= 0 && ss >= 0) {
-        time_left.innerHTML = `${mm} : ${ss}`;
-        ss--;
-      } else if (ss < 0 || mm < 0) {
-        clearInterval(ss_timer);
-      }
+    function setTimer(duration) {
+      timeleft = duration;
+      // console.log("setTimer function called");
+      // console.log(typeof duration);
+      nowTime = new Date();
+
+      var displayHH = Math.floor(nowTime.getHours() + duration / 3600);
+      var displayMM = Math.floor(
+        nowTime.getMinutes() + parseInt(duration) / 60
+      );
+
+      end_time.innerHTML = `Be back at ${displayHH}: ${displayMM}`;
+      // title_.innerHTML = `${displayHH}: ${displayMM}`;
+      // document.title = `${displayHH}: ${displayMM}`;
+      clearInterval(countDown);
+
+      countDown = setInterval(
+        () => {
+          // console.log(a);
+          console.log("Countdown timer is working");
+          console.log(timeleft);
+          if (timeleft >= 0) {
+            console.log("timer working");
+            mm = Math.floor(timeleft / 60);
+            ss = timeleft % 60;
+            time_left.innerHTML = `${mm} : ${ss}`;
+            document.title = `${mm} : ${ss}`;
+            timeleft--;
+          } else {
+            console.log("Timer not working");
+            clearInterval(countDown);
+          }
+        },
+        1000,
+        timeleft
+      );
     }
-    function updateMinutes() {
-      console.log("Update minute done");
-      mm--;
-      ss = 59;
-      if (mm >= 0 && ss >= 0) {
-        time_left.innerHTML = `${mm} : ${ss}`;
-      } else if (ss < 0 || mm < 0) {
-        clearInterval(mm_timer);
-      }
-    }
-    ss_timer = setInterval(updateSeconds, 1000);
-    mm_timer = setInterval(updateMinutes, 60000);
+
+    // function updateSeconds() {
+    //   console.log("update second done");
+    //   if (mm >= 0 && ss >= 0) {
+    //     time_left.innerHTML = `${mm} : ${ss}`;
+    //     ss--;
+    //   } else if (ss < 0 || mm < 0) {
+    //     clearInterval(ss_timer);
+    //   }
+    // }
+    // function updateMinutes() {
+    //   console.log("Update minute done");
+    //   mm--;
+    //   ss = 59;
+    //   if (mm >= 0 && ss >= 0) {
+    //     time_left.innerHTML = `${mm} : ${ss}`;
+    //   } else if (ss < 0 || mm < 0) {
+    //     clearInterval(mm_timer);
+    //   }
+    // }
+    // ss_timer = setInterval(updateSeconds, 1000);
+    // mm_timer = setInterval(updateMinutes, 60000);
 
     // console.log("abaa");
     //let minutes_ = document.querySelector("input");

@@ -1,0 +1,28 @@
+html {
+  background: rgb(35, 215, 247);
+}
+.timer__controls {
+  display: flex;
+  flex-direction: row;
+  background: rgb(35, 215, 247);
+  height: 50px;
+}
+
+.timer__button {
+  flex: 1;
+  background: rgb(35, 215, 247);
+  border: 2px solid black;
+}
+.timer__button:hover {
+  background: rgb(30, 181, 207);
+}
+#custom {
+  flex: 2;
+  background: rgb(35, 215, 247);
+  border: 2px solid black;
+}
+
+#custom > input {
+  width: 95%;
+  height: 89%;
+}

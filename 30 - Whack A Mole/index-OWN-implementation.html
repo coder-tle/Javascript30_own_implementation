@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maaro Billa ko</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700"
+      type="text/css"
+    />
+    <style>
+      html {
+        box-sizing: border-box;
+        font-size: 10px;
+        background: #ffc600;
+      }
+      body {
+        display: block;
+        font-family: "Amatic SC", cursive;
+      }
+      h1 {
+        text-align: center;
+        font-size: 10rem;
+        margin-bottom: 0;
+      }
+      .score {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0 3rem;
+        line-height: 1;
+        border-radius: 1rem;
+      }
+      /* .hole {
+        display: block;
+
+        /* position: absolute; */
+      /* top: 100%; */
+      /* width: 100%; */
+      /* height: 100%; 
+      }*/
+
+      .game {
+        width: 600px;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+      }
+      .hole {
+        flex: 1 0 33.33%;
+        overflow: hidden;
+      }
+      .hole:after {
+        display: block;
+      }
+      .mole {
+        background: url(dirt.svg) bottom no-repeat;
+        background-size: 60%;
+        top: 100%;
+        width: 100%;
+        height: 100%;
+        transition: all 0.4s;
+      }
+      .hole.up .mole {
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Maaro Billa ko! <span class="score">0</span></h1>
+    <button onclick="startGame()">Start!</button>
+    <div class="game">
+      <div class="hole hole1">
+        <div class="mole"></div>
+      </div>
+
+      <div class="hole hole2">
+        <div class="mole"></div>
+      </div>
+
+      <div class="hole hole3">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole4">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole5">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole6">
+        <div class="mole"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const holes = document.querySelectorAll(".hole");
+    const scoreBoard = document.querySelector(".score");
+    const moles = document.querySelector(".mole");
+    var lastHole;
+
+    function randomTime(min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+      //   return Math.round(Math.random());
+      //   return Math.random();
+    }
+
+    function randomHole(holes) {
+      //   console.log(holes);
+
+      const idx = Math.floor(Math.random() * holes.length);
+      //   console.log(idx);
+      const hole = holes[idx];
+      if (hole === lastHole) {
+        console.log("it same as the last hole");
+        return randomHole(holes);
+      }
+      //   console.log(hole);
+      lastHole = hole;
+
+      return hole;
+    }
+
+    function peep() {
+      const time = randomTime(200, 100);
+      const hole = randomHole(holes);
+
+      console.log(time, hole);
+      hole.classList.add("up");
+    }
+  </script>
+</html>

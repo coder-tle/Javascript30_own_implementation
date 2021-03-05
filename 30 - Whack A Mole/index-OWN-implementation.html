@@ -16,13 +16,20 @@
         font-size: 10px;
         background: #ffc600;
       }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
       body {
-        display: block;
+        padding: 0;
+        margin: 0;
         font-family: "Amatic SC", cursive;
       }
       h1 {
         text-align: center;
         font-size: 10rem;
+        line-height: 1;
         margin-bottom: 0;
       }
       .score {
@@ -50,13 +57,31 @@
       .hole {
         flex: 1 0 33.33%;
         overflow: hidden;
+        position: relative;
+        /* background: url(dirt.svg) bottom no-repeat; */
+        /* background-size: 90%; */
       }
       .hole:after {
         display: block;
+        background: url(dirt.svg) bottom center no-repeat;
+        background-size: contain;
+        content: "";
+        width: 100%;
+        height: 70px;
+
+        /* // position absolute made 
+        // the dirt visible why ? */
+        position: absolute;
+        z-index: 2;
+        bottom: -30px;
       }
       .mole {
-        background: url(dirt.svg) bottom no-repeat;
+        border: 1px solid red;
+        background: url("mole.svg") bottom center no-repeat;
         background-size: 60%;
+        /* Why position relative made
+        the mole billa image invisible ? */
+        position: absolute;
         top: 100%;
         width: 100%;
         height: 100%;
@@ -96,8 +121,9 @@
   <script>
     const holes = document.querySelectorAll(".hole");
     const scoreBoard = document.querySelector(".score");
-    const moles = document.querySelector(".mole");
+    const moles = document.querySelectorAll(".mole");
     var lastHole;
+    var timeUp = false;
 
     function randomTime(min, max) {
       return Math.round(Math.random() * (max - min) + min);
@@ -122,11 +148,28 @@
     }
 
     function peep() {
-      const time = randomTime(200, 100);
+      const time = randomTime(200, 1000);
       const hole = randomHole(holes);
 
       console.log(time, hole);
       hole.classList.add("up");
+      setTimeout(() => {
+        hole.classList.remove("up");
+        if (!timeUp) peep();
+      }, time);
+    }
+
+    function startGame() {
+      scoreBoard.textContent = 0;
+      timeUp = false;
+      peep();
+      setTimeout(() => (timeUp = true), 10000);
+    }
+
+    moles.forEach((mole) => mole.addEventListener("click", maaraBillaKo));
+
+    function maaraBillaKo() {
+      scoreBoard.innerHTML++;
     }
   </script>
 </html>
